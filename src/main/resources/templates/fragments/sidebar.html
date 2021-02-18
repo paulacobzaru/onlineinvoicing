@@ -1,0 +1,99 @@
+<nav lang="en" xmlns :th="http://www.thymeleaf.org" id="sidebarMenu"
+     class="col-md-2 col-lg-2 d-md-block bg-light sidebar collapse" th:fragment="menu">
+    <style>
+        img.displayed {
+            display: block;
+            margin-left: auto;
+            margin-right: auto
+        }</style>
+    <img align="center" src="/img/logo.png" alt="Our logo" width="50">
+    <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/app" style="overflow: auto">
+                    <i class="fas fa-code"></i>
+                    <bold>OIL app</bold>
+                </a>
+            </li>
+            <li class="nav-item; text-center">
+                <i class="nav-link"></i>
+                    Users'menu
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/users">
+                    <i class="fas fa-users"></i>
+                    Users
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/clients">
+                    <i class="far fa-address-card"></i>
+                    Clients
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/products">
+                    <i class="fab fa-buffer"></i>
+                    Products
+                </a>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/services">
+                    <i class="fas fa-atom"></i>
+                    Services
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/invoices">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    Invoices
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/payments">
+                    <i class="fas fa-money-check-alt"></i>
+                    Payments
+                </a>
+            </li>
+            <li class="nav-item; text-center">
+                <i class="nav-link"></i>
+                Admins'menu
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/cities">
+                    <i class="fas fa-city"></i>
+                    Cities
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/countries">
+                    <i class="fas fa-globe"></i>
+                    Countries
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/unit_type">
+                    <i class="fas fa-sort-amount-down-alt"></i>
+                    Unit types
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/vat_rate">
+                    <i class="fab fa-acquisitions-incorporated"></i>
+                    Vat rates
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/payment_type">
+                    <i class="fab fa-acquisitions-incorporated"></i>
+                    Payment type
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/app/currencies">
+                    <i class="fas fa-pound-sign"></i>
+                    Currencies
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<main class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <br>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h3>Unit type</h3>
+            <p>This page is designed to manage the types of units.</p>
+            <form action="#" th:action="@{/app/unit_type/saveUnitType}" th:object="${unitType}"
+                  method="post" id="unitTypeForm">
+
+                <div class="form-row">
+                    <img src="/img/unittype.jpg" alt="Register a unit type" height="100px">
+                    <br>
+                    <p>Add a unit type bellow.</p>
+                    <div th:if="${message!=null}" class="alert alert-success"
+                         th:text="${message}"></div>
+                    <input type="hidden" class="form-control" id="unitTypeId"
+                           th:field="*{unitTypeId}">
+                    <div class="form-group col-md-3">
+                        <label type="uniTypeInput">Unit type</label>
+                        <input type="text" class="form-control" id="unitTypeInput"
+                               placeholder="Enter unit type"
+                               th:field="*{unitName}">
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" value="Save">Submit</button>
+                    <button type="button" value="Reset">Reset</button>
+                    <hr>
+                    <table class="table table-hover" style="width: 450px">
+                        <thead th:align="center">
+                        <tr>
+                            <th class="table-secondary"> Unit type</th>
+                            <th class="table-secondary"> Edit Action</th>
+                            <th class="table-secondary"> Delete Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${unitTypeList.isEmpty()}">
+                            <td colspan="3"> No unit type is available.</td>
+                        </tr>
+                        <tr  th:align="center" th:each="unitType: ${unitTypeList}">
+                            <td scope="row"><span th:text="${unitType.unitName}"> Unit type</span></td>
+                            <td><a th:href="@{/app/unit_type/edit/{unitTypeId}(unitTypeId=${unitType.unitTypeId})}">Edit</a></td>
+                            <td><a th:href="@{/app/unit_type/delete/{unitTypeId}(unitTypeId=${unitType.unitTypeId})}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </main>
+    </div>
+
+</main>
+</body>
+</html>

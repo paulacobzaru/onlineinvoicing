@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>Carousel Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Online Invoicing Laboratory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app" target="_blank">Application</a>
+                    </li>
+                    <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/freetrial">Free Trial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus">Contact us</a>
+                    </li>
+                </ul>
+                <img src="/img/logo.png" alt="Logo app" height="50px">
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <style>
+        body {
+            background-image: url("./img/moon.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        p {
+            color: black;
+        }
+    </style>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <h2 style="text-align: center; font: Arial" , class="text-md-start"> TRY ME FREE FOR 30 DAYS! </h2>
+    </div>
+    <br>
+    <div th:if="${message!=null}" class="alert alert-success" th:text="${message}"></div>
+    <div class="container">
+        <form data-toggle="validator" role="form" th:object="${user}" th:action="@{/saveUser}" method="post">
+            <br>
+            <div class="form-group col-md-4">
+                <label for="inputEmail" class="control-label">Email</label>
+                <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="Email"
+                       data-error="Hey, this email is invalid!" required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <br>
+            <div class="form-group col-md-5">
+                <label for="inputPassword" class="control-label">Password</label>
+                <div class="form-inline row">
+                    <div class="form-group col-md-5">
+                        <input th:field="*{password}" type="password" data-minlength="8" class="form-control" id="inputPassword"
+                               placeholder="Password" required>
+                        <div class="help-block">Minimum of 8 characters</div>
+                    </div>
+                    <br>
+                    <br>
+                    <!--<label for="inputPassword" class="control-label">Confirm password</label>-->
+                    <!--div class="form-group col-md-5">
+                        <input type="password" class="form-control" id="inputPasswordConfirm"
+                               data-match="#inputPassword" data-match-error="Whoops, these don't match"
+                               placeholder="Confirm password" required>
+                        <div class="help-block with-errors"></div>
+                    </div-->
+                </div>
+            </div>
+            <br>
+
+            <!--<div class="form-group">
+                <label for="inputRadio" class="control-label">Chose what you are:</label>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="name" required>
+                        Free lancer
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="name" required>
+                        Company
+                    </label>
+                </div>
+            </div>-->
+            <br>
+            <div class="form-group">
+                <label for="inputCheckBox" class="control-label">Pay attention again!</label>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>
+                        Check yourself!
+                    </label>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <br>
+            </div>
+            <br>
+            <p><a style="right:auto" ; class="btn btn-primary ; float-end" href="/app/users" role="button"> Continue!</a></p>
+              </form>
+        <br>
+    </div>
+    <hr>
+    <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <address>
+            Written by <a>Online Invoicing Laboratory LTD</a>.<br>
+            Visit us at:<br>
+            <a href="http://www.expertissimo.ro/">Visit Expertissimo!</a><br>
+            <a href="mailto:>@yahoo.com">Send email</a><br>
+            Our address is:<br>
+            Westborough 66, <br>
+            Zip code: YO111TS<br>
+            Scarborough <br>
+            Uk
+        </address>
+        <p>&copy; 2020-2021 OIL Company LTD. &middot; <a href="/privacy">Privacy policy</a> </p>
+    </footer>
+</main>
+
+
+<script src="/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

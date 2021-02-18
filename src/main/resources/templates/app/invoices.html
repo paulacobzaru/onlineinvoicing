@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+
+<div th:insert="/fragments/header :: header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <style>
+            body {
+                background-color: aqua;
+            }
+
+            p {
+                color: black;
+            }
+        </style>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <br>
+            <h3><strong>Invoices</strong></h3>
+            <p>This page is designed to manage your invoices.</p>
+            <form action="#" th:action="@{/app/saveInvoice}" th:object="${invoice}"
+                  method="post">
+                <div class="form-row">
+                    <img src="/img/invoice-paid.jpg" alt="Invoices" height="100px">
+
+                    <div class="container-fluid">
+                        <br>
+                        <p><strong>Add an invoice bellow.</strong></p>
+                        <div th:if="${message!=null}" class="alert alert-success"
+                             th:text="${message}"></div>
+                        <div class="form-group col-md-6">
+                            <label for="inputClient">Client</label>
+                            <select id="inputClient" class="form-control" th:field="*{client}">
+                                <option selected value="0">Choose a client</option>
+                                <option th:each="client:${clientList}"
+                                        th:value="${client.clientId}"
+                                        th:text="${client.clientName}">
+
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputInvoiceDate">Date:</label>
+                            <input type="date" class="form-control" id="inputInvoiceDate"
+                                   placeholder="Enter a date of invoice" th:field="*{invoiceDate}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputDueDate">Due date:</label>
+                            <input type="date" class="form-control" id="inputDueDate"
+                                   placeholder="Enter a due date" th:field="*{dueDate}">
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label for="inputSupplierNotes"> Supplier's notes</label>
+                            <input type="text" class="form-control" id="inputSupplierNotes"
+                                   placeholder="Enter notes for the client"
+                                   th:field="*{supplierNotes}">
+                        </div>
+                        <br>
+                        <br>
+                        <button type="submit" value="Submit">Submit</button>
+                        <button type="reset" value="Reset">Reset</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <table class="table table-hover; row-cols-lg-auto">
+                <thead>
+                <tr align="center">
+                    <th class="table-secondary"> Client Name</th>
+                    <th class="table-secondary"> Invoice Date</th>
+                    <th class="table-secondary"> Due Date</th>
+                    <th class="table-secondary"> Supplier's notes</th>
+                    <th class="table-secondary"> Details</th>
+                    <th class="table-secondary"> Edit Action</th>
+                    <th class="table-secondary"> Delete Action</th>
+                    <th class="table-secondary"> PDF</th>
+                    <th class="table-secondary"> HTML</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${invoiceList.isEmpty()}">
+                    <td colspan="12"> No invoice is available.</td>
+                </tr>
+                <tr align="center" th:each="invoice:${invoiceList}">
+                    <td scope="row"><span th:text="${invoice.client.clientName}"> Client Name</span></td>
+                    <td scope="row"><span th:text="${invoice.invoiceDate}"> Invoice Date</span></td>
+                    <td scope="row"><span th:text="${invoice.dueDate}"> Due Date</span></td>
+                    <td scope="row"><span th:text="${invoice.supplierNotes}"> Supplier's notes </span></td>
+                    <td scope="row"><a th:href="@{/app/invoiceLine/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                        Details</a></td>
+                    <td scope="row"><a th:href="@{/app/invoices/edit/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                        Edit</a></td>
+                    <td scope="row"><a th:href="@{/app/invoices/delete/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                        Delete</a>
+                    </td>
+                    <td scope="row"><a th:href="@{/report/invoice/pdf/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                        PDF</a>
+                    </td>
+                    <td scope="row"><a th:href="@{/report/invoice/html/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                        HTML</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function deleteInvoice(invoiceId){
+        var invoiceLineIdList;
+        invoiceLineIdList = invoiceId.contains(invoiceLineIdList);
+        document.getElementById("invoice").deleteInvoice(invoice);
+    }
+</script>

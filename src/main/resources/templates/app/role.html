@@ -1,0 +1,46 @@
+<!--<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <form action="/action_page.php" method="get">
+                <h3>Cities</h3>
+                <p>This page is designed to manage the roles.</p>
+                <form action="#" th:action="@{/app/saveRole}" th:object="${city}"
+                      method="post">
+                    <div class="form-row">
+                        <div class="container-fluid">
+                            <p>Add a city bellow.</p>
+                            <div class="form-group col-md-3">
+                                <label type="cityNameInput">City name</label>
+                                <input type="text" class="form-control" id="cityNameInput"
+                                       placeholder="Enter country name" th:field="*{cityName}">
+                            </div>
+                            <button type="submit" value="Submit">Submit</button>
+                            <button type="reset" value="Reset">Reset</button>
+                        </div>
+                    </div>
+                </form>
+        </main>
+    </div>
+</div>-->

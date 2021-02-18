@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<main class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <br>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h3>Currencies</h3>
+            <p>This page is designed to manage your currencies.</p>
+            <form action="#" th:action="@{/app/currencies/saveCurrency}" th:object="${currency}"
+                  method="post" id="currencyId">
+                <div class="form-row">
+                    <img src="/img/currencies.jpg" alt="Register a currency" height="100px">
+                    <br>
+                    <br>
+                    <div class="container-fluid">
+                        <p><strong>Add a currency bellow.</strong></p>
+                        <div th:if="${message!=null}" class="alert alert-success"
+                             th:text="${message}"></div>
+                        <input type="hidden" class="form-control" id="currencyId"
+                               th:field="*{currencyId}">
+                        <div class="form-group col-md-3">
+                            <label for="inputCurrency">Currency symbol</label>
+                            <input type="text" class="form-control" id="currencySymbolInput"
+                                   placeholder="Enter a currency symbol"
+                                   th:field="*{currencySymbol}">
+                        </div>
+                        <br>
+                        <div class="form-group col-md-3">
+                            <label for="inputCurrency">Currency name</label>
+                            <input type="text" class="form-control" id="currencyNameInput"
+                                   placeholder="Enter a currency name"
+                                   th:field="*{currencyName}">
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <button type="submit" value="Save">Submit</button>
+                            <button type="button" value="Reset">Reset</button>
+                        </div>
+                        <hr>
+                        <table class="table table-hover; row-cols-lg-auto" style="De:450px">
+                            <thead>
+                            <tr align="center">
+                                <th class="table-secondary"> Currency symbol</th>
+                                <th class="table-secondary"> Currency name</th>
+                                <th class="table-secondary"> Edit Action</th>
+                                <th class="table-secondary"> Delete Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${currencyList.isEmpty()}">
+                                <td colspan="3"> No currency is available.</td>
+                            </tr>
+                            <tr align="center" th:each="currency: ${currencyList}">
+                                <td scope="row"><span th:text="${currency.currencySymbol}"> Currency symbol </span></td>
+                                <td scope="row"><span th:text="${currency.currencyName}"> Currency name </span></td>
+                                <td><a th:href="@{/app/currencies/edit/{currencyId}(currencyId=${currency.currencyId})}">Edit</a></td>
+                                <td><a th:href="@{/app/currencies/delete/{currencyId}(currencyId=${currency.currencyId})}">Delete</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+</main>
+</body>
+</html>
+

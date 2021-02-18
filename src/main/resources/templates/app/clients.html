@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+    <style>
+        body {
+            font-family: 'Calibri', serif;
+            font-size: 11pt;
+        }
+    </style>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<div class="container-fluid">
+    <div th:insert="/fragments/sidebar :: menu"></div>
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <form action="#" th:action="@{/app/saveClient}" th:object="${client}"
+              method="post">
+            <br>
+            <h3>Clients</h3>
+            <p>This page is designed to manage your clients.</p>
+            <div class="form-row">
+                <img src="/img/clients.jpg" alt="Clients" height="100px">
+                <br>
+                <br>
+                <div class="container-fluid">
+                    <p><strong>Add a client bellow.</strong></p>
+                    <div th:if="${message!=null}" class="alert alert-success"
+                         th:text="${message}"></div>
+                    <input type="hidden" class="form-control" id="clientId"
+                           th:field="*{clientId}">
+                    <div class="form-group col-md-4">
+                        <label for="clientNameInput">Company name</label>
+                        <input type="text" class="form-control" id="clientNameInput"
+                               placeholder="Enter company name" th:field="*{clientName}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="vatCodeInput">Vat Code</label>
+                        <input type="text" class="form-control" id="vatCodeInput"
+                               placeholder="Enter Vat Code"
+                               th:field="*{vatNumber}">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail"
+                                   placeholder="Email"
+                                   th:field="*{email}">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label for="inputAddress1">Address</label>
+                                <input type="text" class="form-control" id="inputAddress1"
+                                       placeholder="Street, number" th:field="*{address1}">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-2">
+                                    <label for="inputCity">City</label>
+                                    <select id="inputCity" class="form-control" th:field="*{city}">
+                                        <option selected value="0">Choose city</option>
+                                        <option th:each="city:${cityList}" th:value="${city.cityId}"
+                                                th:text="${city.cityName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputCountry">Country</label>
+                                    <select id="inputCountry" class="form-control" th:field="*{country}">
+                                        <option selected value="0">Choose country</option>
+                                        <option th:each="country:${countryList}"
+                                                th:value="${country.countryId}"
+                                                th:text="${country.countryName}"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputZip">Zip</label>
+                                    <input type="text" class="form-control" id="inputZip"
+                                           placeholder="Zip"
+                                           th:field="*{zipCode}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputBank">Bank</label>
+                            <input type="text" class="form-control" id="inputBank"
+                                   placeholder="Bank"
+                                   th:field="*{bank}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputAccount">Account number</label>
+                            <input type="text" class="form-control" id="inputAccount"
+                                   placeholder="Account number"
+                                   th:field="*{accountNumber}">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputAccount1">Sort-code</label>
+                        <input type="text" class="form-control" id="inputAccount1"
+                               placeholder="Sort-code"
+                               data-th-formaction="00-00-00" th:field="*{accountSortCode}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="telephoneInput">Telephone</label>
+                        <input type="tel" class="form-control" id="telephoneInput"
+                               placeholder="Telephone number"
+                               th:field="*{telephone}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputWebsite">Website</label>
+                        <input type="text" class="form-control" id="inputWebsite"
+                               placeholder="Website"
+                               th:field="*{website}">
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" value="Submit">Submit</button>
+                    <button type="reset" value="Reset">Reset</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <table class="table table-hover; row-cols-lg-auto; font-weight-light">
+            <thead>
+            <tr align="center">
+                <th class="table-secondary"> Client Name</th>
+                <th class="table-secondary"> Vat Number</th>
+                <th class="table-secondary"> Telephone</th>
+                <th class="table-secondary"> Email</th>
+                <th class="table-secondary"> Website</th>
+                <th class="table-secondary"> Address</th>
+                <th class="table-secondary"> City</th>
+                <th class="table-secondary"> Country</th>
+                <th class="table-secondary"> Zip Code</th>
+                <th class="table-secondary"> Bank</th>
+                <th class="table-secondary"> Account Number</th>
+                <th class="table-secondary"> Sort Code</th>
+                <th class="table-secondary"> Edit</th>
+                <th class="table-secondary"> Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${clientList.isEmpty()}">
+                <td colspan="15"> No client is available.</td>
+            </tr>
+            <tr align="center" th:each="client:${clientList}">
+                <td scope="row"><span th:text="${client.clientName}"> Client Name</span></td>
+                <td scope="row"><span th:text="${client.vatNumber}"> Vat Number</span></td>
+                <td scope="row"><span th:text="${client.telephone}"> Telephone</span></td>
+                <td scope="row"><span th:text="${client.email}"> Email</span></td>
+                <td scope="row"><span th:text="${client.website}"> Website</span></td>
+                <td scope="row"><span th:text="${client.address1}"> Address</span></td>
+                <td scope="row"><span th:text="${client.city.cityName}"> City</span></td>
+                <td scope="row"><span th:text="${client.country.countryName}"> Country</span></td>
+                <td scope="row"><span th:text="${client.zipCode}"> Zip Code</span></td>
+                <td scope="row"><span th:text="${client.bank}"> Bank</span></td>
+                <td scope="row"><span th:text="${client.accountNumber}"> Account Number</span></td>
+                <td scope="row"><span th:text="${client.accountSortCode}"> Sort Code</span></td>
+                <td><a th:href="@{/app/clients/edit/{clientId}(clientId=${client.clientId})}"> Edit</a></td>
+                <td><a th:href="@{/app/clients/delete/{clientId}(clientId=${client.clientId})}"> Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+</body>
+</html>

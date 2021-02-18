@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<main class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <br>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <h3>Vat rates</h3>
+            <p>This page is designed to manage the Vat rates.</p>
+            <form action="#" th:action="@{/app/saveVatRate}" th:object="${vatRate}"
+                  method="post" id="inputVatRate">
+                <div class="form-row">
+                    <img src="/img/vatrate.jpg" alt="Vat rates" height="100px">
+                    <br>
+                    <br>
+                    <div class="container-fluid">
+                        <p>Add a Vat rate bellow.</p>
+                        <div th:if="${message!=null}" class="alert alert-success"
+                             th:text="${message}"></div>
+                        <input type="hidden" class="form-control" id="vatRateId"
+                               th:field="*{vatRateId}">
+                        <div class="form-group col-md-2">
+                            <label for="inputVatRate">Vat rate</label>
+                            <input type="text" class="form-control" id="inputVatRate"
+                                   placeholder="Enter Vat rate"
+                                   th:field="*{vatRate}">
+                        </div>
+                        <br>
+                        <br>
+                        <button type="submit" value="Submit">Submit</button>
+                        <button type="reset" value="Reset">Reset</button>
+                    </div>
+                    <hr>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="table-secondary"> Vat rate</th>
+                            <th class="table-secondary"> Edit Action</th>
+                            <th class="table-secondary"> Delete Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${vatRateList.isEmpty()}">
+                            <td colspan="3"> No Vat rate is available.</td>
+                        </tr>
+                        <tr th:each="vatRate:${vatRateList}">
+                            <td scope="row"><span th:text="${vatRate.vatRate}"> Vat rate</span></td>
+                            <td><a th:href="@{/app/vat_rate/edit/{vatRateId}(vatRateId=${vatRate.vatRateId})}"> Edit</a></td>
+                            <td><a th:href="@{/app/vat_rate/delete/{vatRateId}(vatRateId=${vatRate.vatRateId})}"> Delete</a>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </main>
+    </div>
+
+</main>
+</body>
+</html>

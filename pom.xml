@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--https://maven.apache.org/guides/introduction/introduction-to-the-pom.html-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!--the spring-boot-starter-parent project is a special starter project
+	– that provides default configurations for our application and a complete dependency tree
+	- to quickly build our Spring Boot project;
+	- it also provides default configuration for Maven plugins
+	- such as maven-failsafe-plugin, maven-jar-plugin, maven-surefire-plugin, maven-war-plugin;
+	- it also inherits dependency management from spring-boot-dependencies,
+	 - which is the parent to the spring-boot-starter-parent-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.4.1</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.sda</groupId>
+	<artifactId>onlineinvoicing</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>onlineinvoicing</name>
+	<description>Online Invoicing project</description>
+
+	<properties>
+		<java.version>8</java.version>
+	</properties>
+
+	<dependencies>
+		<!--the depedency to run a Spring project with JPA (the connection with database)-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<!-- the depedency for security of users in Spring framework -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<!--the depedency to run the Thymeleaf framework,
+		which gives us new methods to the connect Java with the fron-end app-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+
+		</dependency>
+		<!--the depedency to run web pages - gives us the possibility to deply HTTP pages:
+		- it offers the possibility to connect to the HTTP through @GetPapping, @PostMapping
+		- annotations; this is for web mvc(model view controller) structure-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--the Thymeleaf depedency offers the access to different methods/objects of security-->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+		<!-- this is the depedency to MYSQL database connection-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!--the Tomcat server offers the online connection to the user;
+		- it will run continously until the user gives commands;
+		- without it the SpringBoot app will run on embedded format-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+		<!--the depedency to the SpringBoot testing support-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--the depedency to the SpringBoot users'security-->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--the Hibernate depedency-->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.12.Final</version>
+		</dependency>
+		<!--In Maven repository,
+		- the depedency to the H2 database engine is used for integration tests
+		 - starts the H2 server-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.194</version>
+		</dependency>
+		<!--the Javax depedency offers the validation for API jar 2.0.1 Final
+		- bean validation 2.0 is defined by JSR 380 to give leverages language features;
+		- the JSR 380 specification - a specification of Java API for bean validation
+		- this ensures that the properties of a bean meet specific criteria,
+		- using annotations such as @NotNull, @Min, and @Max.
+		- takes advantage of new features added in Java 8,
+		- such as type annotations and support for new types,
+		 - like Optional and LocalDate-->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+		<!-- a dependcy of Maven depedencies:
+		- JSR 380 supports variable interpolation,
+		- allowing expressions inside the violation messages.
+		- to parse these expressions, we'll add the javax.el dependency from GlassFish,
+		- that contains  an implementation of the Expression Language specification-->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.el</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<!--a tool which helps to
+		- to manage a different version of a dependency provided by the starter parent,
+		- we can declare dependency and its version explicitly
+		- in the dependency management section-->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>2.1.9.RELEASE</version>
+        </dependency>
+		<!--a JDBC driver:
+		- this depedency with this scope are required at runtime,
+		- but they're not needed for compilation of the project code;
+		- dependencies marked with the runtime scope will be present in runtime
+		- and test classpath, but they will be missing from compile classpath-->
+    <dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!--starter for testing Spring Boot applications with libraries
+		- in this case with the exclusion of Junit vintage depedency;
+		- junit-vintage-engine is used for running JUnit 4 tests
+		- junit-jupiter-engine for JUnit 5 tests.-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>-->
+		<!--depedency for JASPER reports-->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.16.0</version>
+		</dependency>
+
+	</dependencies>
+	<!--to use the Spring Boot Maven Plugin,
+	- we must include the appropriate XML in the plugins section of pom.xml-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

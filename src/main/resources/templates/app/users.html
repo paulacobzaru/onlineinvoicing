@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+
+
+
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<div class="container-fluid">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <form action="#" th:action="@{/app/saveUser}" th:object="${user}" method="post">
+                <br>
+                <h3>Users</h3>
+                <p>This page is designed to manage the users.</p>
+                <div class="form-row">
+                    <img src="/img/password.jpg" alt="Users" height="100px">
+                    <br>
+                    <br>
+                    <div class="container-fluid">
+                        <p><strong>Add a user bellow.</strong></p>
+                        <div class="form-group col-md-3">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail"
+                                   placeholder="Email"
+                                   th:field="*{email}">
+                        </div>
+                        <input type="hidden" class="form-control" id="userId"
+                               th:field="*{userId}">
+                        <div class="form-group col-md-3">
+                            <label for="companyNameInput">Supplier name</label>
+                            <input type="text" class="form-control" id="companyNameInput"
+                                   placeholder="Enter your company name"
+                                   th:field="*{companyName}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="vatCodeInput">Vat Code</label>
+                            <input type="text" class="form-control" id="vatCodeInput"
+                                   placeholder="Enter your Vat code"
+                                   th:field="*{vatNumber}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputAddress3">Address</label>
+                            <input type="text" class="form-control" id="inputAddress3"
+                                   placeholder="Street, number" th:field="*{address3}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZipCode1">Zip</label>
+                            <input type="text" class="form-control" id="inputZipCode1"
+                                   placeholder="Enter Zip code"
+                                   th:field="*{zipCode1}">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="inputCity">City</label>
+                                <select id="inputCity" class="form-control" th:field="*{city}">
+                                    <option selected value="0">Choose City</option>
+                                    <option th:each="city:${cityList}" th:value="${city.cityId}"
+                                            th:text="${city.cityName}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label for="inputCountry">Country</label>
+                                <select id="inputCountry" class="form-control" th:field="*{country}">
+                                    <option selected value="0">Choose Country</option>
+                                    <option th:each="country:${countryList}"
+                                            th:value="${country.countryId}"
+                                            th:text="${country.countryName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputBank">Bank</label>
+                            <input type="text" class="form-control" id="inputBank"
+                                   placeholder="Bank"
+                                   th:field="*{bank}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputAccount">Account number</label>
+                            <input type="text" class="form-control" id="inputAccount"
+                                   placeholder="Account number"
+                                   th:field="*{accountNumber}">
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            <label for="inputSortCode">Sort Code</label>
+                            <input type="text" class="form-control" id="inputSortCode"
+                                   placeholder="Account sort-code"
+                                   data-th-formaction="00-00-00"
+                                   th:field="*{SortCode}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="telephoneInput">Telephone</label>
+                            <input type="tel" class="form-control" id="telephoneInput"
+                                   placeholder="Enter a telephone number"
+                                   th:field="*{telephone}">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputWebsite">Website</label>
+                            <input type="text" class="form-control" id="inputWebsite"
+                                   placeholder="Website"
+                                   th:field="*{website}">
+                        </div>
+                        <br>
+                        <br>
+                        <button type="submit" value="Submit">Submit</button>
+                        <button type="reset" value="Reset">Reset</button>
+                    </div>
+                </div>
+            </form>
+    <hr>
+            <table class="table table-hover; row-cols-md-auto">
+                <thead>
+                <tr align="center">
+                    <th class="table-secondary"> Email</th>
+                    <!--<th class="table-secondary"> Password</th> -->
+                    <th class="table-secondary"> Company name</th>
+                    <th class="table-secondary"> Vat number</th>
+                    <th class="table-secondary"> Address</th>
+                    <th class="table-secondary"> Zip code</th>
+                    <th class="table-secondary"> City</th>
+                    <th class="table-secondary"> Country</th>
+                    <!--<th class="table-secondary"> Currency</th>-->
+                    <th class="table-secondary"> Bank</th>
+                    <th class="table-secondary"> Account number</th>
+                    <th class="table-secondary"> Sort code</th>
+                    <th class="table-secondary"> Telephone</th>
+                    <th class="table-secondary"> Website</th>
+                    <!--<th class="table-secondary"> User type</th>-->
+                    <th class="table-secondary"> Edit Action</th>
+                    <th class="table-secondary"> Delete Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!--<tr th:if="${userList.isEmpty()}">
+                <td colspan="17"> No user is available.</td>
+            </tr>-->
+            <tr align="center" th:each="user:${userList}">
+                <td scope="row"><span th:text="${user.email}"> Email</span></td>
+                <!--<td scope="row"><span th:text="${user.password}"> Email</span> </td>-->
+                <td scope="row"><span th:text="${user.companyName}"> Company name </span></td>
+                <td scope="row"><span th:text="${user.vatNumber}"> Vat number </span></td>
+                <td scope="row"><span th:text="${user.address3}"> Address </span></td>
+                <td scope="row"><span th:text="${user.zipCode1}"> Zip code </span></td>
+                <td scope="row"><span th:text="${user.city.cityName}"> City </span></td>
+                <td scope="row"><span th:text="${user.country.countryName}"> Country </span></td>
+                <!--<td scope="row"><span th:text="${user.currency.currencySymbol}"> Currency </span> </td>-->
+                <td scope="row"><span th:text="${user.bank}"> Bank </span></td>
+                <td scope="row"><span th:text="${user.accountNumber}"> Account number </span></td>
+                <td scope="row"><span th:text="${user.sortCode}"> Sort code </span></td>
+                <td scope="row"><span th:text="${user.telephone}"> Telephone </span></td>
+                <td scope="row"><span th:text="${user.website}"> Website </span></td>
+                <!--<td scope="row"><span th:text="${user.userType}"> User type </span></td>-->
+                <td><a th:href="@{/app/users/edit/{userId}(userId=${user.userId})}"> Edit</a></td>
+                <td><a th:href="@{/app/users/delete/{userId}(userId=${user.userId})}"> Delete</a>
+            </tr>
+            </tbody>
+        </table>
+        </main>
+</div>
+</body>
+</html>

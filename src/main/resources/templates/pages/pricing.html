@@ -1,0 +1,195 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+    <title>Carousel Template · Bootstrap v5.0</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/pricing.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="/css/carousel.css" rel="stylesheet">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Online Invoicing Laboratory</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/app" target="_blank">Application</a>
+                    </li>
+                    <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/freetrial">Free Trial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus">Contact us</a>
+                    </li>
+                </ul>
+                <img src="/img/logo.png" alt="Logo app" height="50px">
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <style>
+        body {
+            background-image: url("./img/moon-up.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        p {
+            color: black;
+        }
+    </style>
+
+    <br>
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4" style="text-emphasis-style: triangle">Pricing is priceless!</h1>
+        <p class="lead">We are not the only one,
+            <br>but OIL is be the best.</p>
+            <p>We want to select good customers,
+            <br>because we offer high quality and support.
+            <br>We don't want you to buy expensive from us,
+            <br>because, if we help you to grow,
+            <br>you can help us to be your best!
+            <br>Watch out our special discounts!
+            </p>
+    </div>
+
+    <div class="container">
+        <div class="card-deck mb-3 text-center">
+            <div class="card mb-2 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Free trial for 30 days!</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"> 0 pounds <small class="text-muted">/ month</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>100 invoices included</li>
+                        <li>100 receipts included</li>
+                        <li>365 days long</li>
+                        <li>Email support</li>
+                        <li>Help center access</li>
+                    </ul>
+                    <p><a class="btn btn-lg btn-block btn-outline-primary" href="/freetrial" role="button">Sign up for free</a></p>
+                    <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/freetrial">
+                        Sign up for free
+                    </button>-->
+                </div>
+            </div>
+            <div class="card mb-2 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Most popular!</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"> 10 pounds <small class="text-muted">/ month</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Unlimited invoices</li>
+                        <li>Unlimited receipts</li>
+                        <li>Unlimited records</li>
+                        <li>Phone and email support</li>
+                        <li>Help center access</li>
+                    </ul>
+                    <p><a class="btn btn-lg btn-block btn-outline-primary" href="/contactus" role="button">Get started</a></p>
+                    <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/app">Get started</button>-->
+                </div>
+            </div>
+            <div class="card mb-2 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Customised offers!</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">Customised prices <small class="text-muted">/ month </small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Customised invoices</li>
+                        <li>Customised receipts</li>
+                        <li>Customised reports</li>
+                        <li>Phone and email support</li>
+                        <li>Help center access</li>
+                    </ul>
+                    <p><a class="btn btn-lg btn-block btn-outline-primary" href="/contactus" role="button">Contact us</a></p>
+                    <!--<button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/freetrial">Contact us</button>-->
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <hr>
+    <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <address>
+            Written by <a>Online Invoicing Laboratory LTD</a>.<br>
+            Visit us at:<br>
+            <a href="http://www.expertissimo.ro/">Visit Expertissimo!</a><br>
+            <a href="mailto:>@yahoo.com">Send email</a><br>
+            Our address is:<br>
+            Westborough 66, <br>
+            Zip code: YO111TS<br>
+            Scarborough <br>
+            Uk
+        </address>
+        <p>&copy; 2020-2021 OIL Company LTD. &middot; <a href="/privacy">Privacy policy</a> </p>
+    </footer>
+</main>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/js/jquery-slim.min.js"><\/script>')</script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/holder.min.js"></script>
+<script>
+    Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+    });
+</script>
+
+</body>
+</html>

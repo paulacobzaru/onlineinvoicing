@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body onload="selectType()">
+
+<div th:insert="/fragments/header :: header"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+        <style>
+            body {
+                background-color: aqua;
+            }
+
+            p {
+                color: black;
+            }
+        </style>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <br>
+            <h3>Invoices</h3>
+            <p>This page is designed to manage your invoices.</p>
+
+            <label th:align="right" for="invoice"><strong>Invoice number:</strong></label>
+            <p th:text="${invoice.invoiceId}"/>
+            <label th:align="right" for="invoice"><strong>Client:</strong></label>
+            <p th:text="${invoice.client.clientName}"/>
+            <label th:align="right" for="invoice"><strong>Date of invoice:</strong></label>
+            <p th:text="${invoice.invoiceDate}"/>
+            <label th:align="right" for="invoice"><strong>Due date of invoice:</strong></label>
+            <p th:text="${invoice.dueDate}"/>
+            <div class="form-row">
+                <form action="#" th:action="@{/app/saveInvoiceLine}" th:object="${invoiceLine}"
+                      method="post">
+                    <img src="/img/invoice-paid.jpg" alt="Invoices" height="100px">
+                    <div class="container-fluid">
+                        <br>
+                        <p><strong>Add an invoice line bellow.</strong></p>
+                        <input type="hidden" class="form-control" id="invoiceLineId" th:field="*{invoiceLineId}" readonly>
+                        <div class="form-group col-md-3">
+                            <label for="invoice">Invoice number:</label>
+                            <input type="text" class="form-control" id="invoice"
+                                   placeholder="Enter invoice number" th:field="*{invoice.invoiceId}" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="invoiceLineTypeInput">Invoice Line Type</label>
+                            <select class="form-control" id="invoiceLineTypeInput" th:field="*{invoiceLineType}"
+                                    onchange="selectType()">
+                                <option th:value="customerService">Service</option>
+                                <option th:value="product">Product</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3" id="customerServiceDiv" style="display: block" th:if="*{invoiceLineType=='customerService' or invoiceLineType==null}">
+                            <label for="inputCustomerService">Customer service</label>
+                            <select id="inputCustomerService" class="form-control" th:field="*{customerService}">
+                                <option selected value="0">Choose a service</option>
+                                <option th:each="customerService:${customerServiceList}"
+                                        th:value="${customerService.serviceId}"
+                                        th:text="${customerService.serviceName}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3" id="productDiv" style="display: block" th:if="*{invoiceLineType=='product' or invoiceLineType==null}">
+                            <label for="inputProduct">Product</label>
+                            <select id="inputProduct" class="form-control" th:field="*{product}">
+                                <option selected value="0">Choose a product</option>
+                                <option th:each="product:${productList}"
+                                        th:value="${product.productId}"
+                                        th:text="${product.productName}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputQuantity">Quantity</label>
+                            <input type="number" class="form-control" id="inputQuantity"
+                                   placeholder="Enter the quantity"
+                                   th:field="*{quantity}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="inputPrice">Unit price</label>
+                            <input type="number" class="form-control" id="inputPrice"
+                                   placeholder="Enter the unit price"
+                                   th:field="*{price}">
+                        </div>
+
+
+                        <br>
+                        <br>
+                        <button type="submit" value="Submit">Submit</button>
+                        <button type="reset" value="Reset">Reset</button>
+                    </div>
+                </form>
+                </div>
+            <hr>
+            <table class="table table-hover; row-cols-lg-auto">
+                <thead>
+                <tr align="center">
+                    <th class="table-secondary"> Type</th>
+                    <th class="table-secondary"> Product</th>
+                    <th class="table-secondary"> Service</th>
+                    <th class="table-secondary"> Unit Type</th>
+                    <th class="table-secondary"> Quantity</th>
+                    <th class="table-secondary"> Price</th>
+                    <th class="table-secondary"> Value</th>
+                    <th class="table-secondary"> Vat</th>
+                    <th class="table-secondary"> Total</th>
+                    <th class="table-secondary"> Edit Action</th>
+                    <th class="table-secondary"> Delete Action</th>
+                </tr>
+                </thead>
+                <tbody class="float-lg-right">
+                <tr th:if="${invoiceLineList.isEmpty()}">
+                    <td colspan="10"> No invoice line is available.</td>
+                </tr>
+                <tr th:each="invoiceLine:${invoiceLineList}">
+                    <td align="center" scope="row"><span th:text="${invoiceLine.invoiceLineType}">Type</span></td>
+                    <td align="center" scope="row"><span th:text="${invoiceLine.product?.productName}">Product</span></td>
+                    <td align="center" scope="row"><span th:text="${invoiceLine.customerService?.serviceName}"> Service</span></td>
+                    <td align="center" scope="row"><span th:text="${invoiceLine.unitType?.unitName}">Unit type</span></td>
+                    <td align="right" scope="row"><span th:text="${#numbers.formatDecimal(invoiceLine.quantity, 0, 'COMMA', 2, 'POINT')}"> Quantity</span></td>
+                    <td align="right" scope="row"><span th:text="${#numbers.formatDecimal(invoiceLine.price, 0, 'COMMA', 2, 'POINT')}"> Price</span></td>
+                    <td align="right" scope="row"><span th:text="${#numbers.formatDecimal(invoiceLine.quantity*invoiceLine.price, 0, 'COMMA', 2, 'POINT')}"> Value</span></td>
+                    <td align="right" scope="row"><span th:text="${#numbers.formatDecimal(((invoiceLine.quantity*invoiceLine.price*invoiceLine.vatRate)/100), 0, 'COMMA', 2, 'POINT')}"> VAT</span></td>
+                    <td align="right" scope="row"><span th:text="${#numbers.formatDecimal(((invoiceLine.quantity*invoiceLine.price*invoiceLine.vatRate)/100)+invoiceLine.quantity*invoiceLine.price, 0, 'COMMA', 2, 'POINT')}"> VAT</span></td>
+                    <td align="center">
+                        <a th:href="@{/app/invoiceLine/edit/{invoiceLineId}(invoiceLineId=${invoiceLine.invoiceLineId})}">
+                            Edit</a></td>
+                    <td align="center">
+                        <a th:href="@{/app/invoiceLine/delete/{invoiceId}/{invoiceLineId}(invoiceId=${invoiceLine.invoice.invoiceId},invoiceLineId=${invoiceLine.invoiceLineId})}">
+                            Delete</a></td>
+                </tr>
+                <tr align="right">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td th:text="${#numbers.formatDecimal(totalValue, 0, 'COMMA', 2, 'POINT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(totalVat, 0, 'COMMA',2, 'POINT')}"></td>
+                    <td th:text="${#numbers.formatDecimal(totalSum, 0, 'COMMA',2, 'POINT')}"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function selectType() {
+        var invoiceLineType = document.getElementById('invoiceLineTypeInput');
+        var value = invoiceLineType.options[invoiceLineType.selectedIndex].value;
+        if (value === 'customerService') {
+            document.getElementById('productDiv').style.display = "none";
+            document.getElementById('customerServiceDiv').style.display = "block";
+        } else {
+            document.getElementById('productDiv').style.display = "block";
+            document.getElementById('customerServiceDiv').style.display = "none";
+        }
+    }
+
+</script>

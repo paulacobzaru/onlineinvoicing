@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/dashboard.css" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="/js/bootstrap.js"></script>
+    <title>Online Invoicing</title>
+</head>
+<body>
+<style>
+    body {
+        background-color: aqua;
+    }
+
+    p {
+        color: black;
+    }
+</style>
+<div th:insert="/fragments/header :: header"></div>
+
+<main class="container-fluid">
+    <div class="row">
+        <div th:insert="/fragments/sidebar :: menu"></div>
+
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <br>
+            <h3>Products</h3>
+            <p>This page is designed to manage your products.</p>
+            <form action="#" th:action="@{/app/saveProduct}" th:object="${product}"
+                  method="post">
+                <div class="form-row">
+                    <img src="/img/products.jpg" alt="Products" height="100px">
+                    <p>Add a product bellow.</p>
+                    <div th:if="${message!=null}" class="alert alert-success"
+                         th:text="${message}"></div>
+                    <input type="hidden" class="form-control" id="productId"
+                           th:field="*{productId}">
+                    <div class="form-group col-md-3">
+                        <label for="productInput">Product name</label>
+                        <input type="text" class="form-control" id="productInput"
+                               placeholder="Enter a product name"
+                               th:field="*{productName}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="unitType">Unit Type</label>
+                        <select id="unitType" class="form-control" th:field="*{unitType}">
+                            <option selected value="0">Choose a unit type</option>
+                            <option th:each="unitType:${unitTypeList}"
+                                    th:value="${unitType.unitTypeId}"
+                                    th:text="${unitType.unitName}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="quantitytInput">Quantity</label>
+                    <input type="text" class="form-control" id="quantity"
+                           placeholder="Enter a quantity"
+                           th:field="*{stock}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="productAcquisitionInput">Acquisition price</label>
+                    <input type="text" class="form-control" id="acquisitionPrice"
+                           placeholder="Enter a price"
+                           th:field="*{acquisitionPrice}">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="vatRate">VAT Rate</label>
+                    <select id="vatRate" class="form-control" th:field="*{vatRate}">
+                        <option selected value="0">Choose a VAT Rate</option>
+                        <option th:each="vatRate:${vatRateList}"
+                                th:value="${vatRate.vatRateId}"
+                                th:text="${vatRate.vatRate}">
+                        </option>
+                    </select>
+                </div>
+                <!--the date of acuisition must not be after the date of sale-->
+                <div class="form-group col-md-2">
+                    <label for="dateOfAcquisitionInput">Acquisition date</label>
+                    <input type="date" class="form-control" id="dateOfAcquisition"
+                           placeholder="Enter the date of acquisition" th:field="*{dateOfAcquisition}">
+                </div>
+                <!--the date of sale must not be after the due date-->
+                <div class="form-group col-md-2">
+                    <label for="dueDateInput">Expiration date</label>
+                    <input type="date" class="form-control" id="expirationDate" placeholder="Enter the due date"
+                           th:field="*{expirationDate}">
+                </div>
+                <br>
+                <br>
+                <div>
+                    <button type="submit" value="Submit">Submit</button>
+                    <button type="reset" value="Reset">Reset</button>
+                </div>
+            </form>
+            <hr>
+            <table class="table table-hover; row-cols-lg-auto">
+                <thead>
+                <tr>
+                    <th align="center" class="table-secondary"> Product Name</th>
+                    <th align="center" class="table-secondary"> Unit Type</th>
+                    <th align="right" class="table-secondary"> Quantity</th>
+                    <th align="right" class="table-secondary"> Acquisition price</th>
+                    <th align="center" class="table-secondary"> VAT Rate</th>
+                    <th align="center" class="table-secondary"> Acquisition date</th>
+                    <th align="center" class="table-secondary"> Expiration date</th>
+                    <th align="center" class="table-secondary"> Edit Action</th>
+                    <th align="center" class="table-secondary"> Delete Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${productList.isEmpty()}">
+                    <td colspan="8"> No product is available.</td>
+                </tr>
+                <tr th:each="product:${productList}">
+                    <td align="center" scope="row"><span th:text="${product.productName}"> Product Name</span></td>
+                    <td align="center" scope="row"><span th:text="${product.unitType.unitName}"> Unit Type</span></td>
+                    <td align="right"scope="row"><span th:text="${product.stock}"> Quantity</span></td>
+                    <td align="right" scope="row"><span th:text="${product.acquisitionPrice}"> Acquistion Price</span></td>
+                    <td align="right"scope="row"><span th:text="${product.vatRate.vatRate}"> VAT Rate</span></td>
+                    <td align="center" cope="row"><span th:text="${product.dateOfAcquisition}"> Date of Acquisition</span></td>
+                    <td align="center" scope="row"><span th:text="${product.expirationDate}"> Date of Expiration</span></td>
+                    <td align="center"><a th:href="@{/app/products/edit/{productId}(productId=${product.productId})}"> Edit</a></td>
+                    <td align="center"><a th:href="@{/app/products/delete/{productId}(productId=${product.productId})}"> Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </main>
+    </div>
+</main>
+</body>
+</html>
