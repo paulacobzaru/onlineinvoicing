@@ -62,22 +62,6 @@
                                placeholder="Enter a value to be paid"
                                th:field="*{valuePaid}">
                     </div>
-                    <div class="form-group col-md-2">
-                        <label for="invoiceInput">Invoice paid</label>
-                        <select id="invoiceInput" class="form-control" th:field="*{invoice}">
-                            <option selected value="0">Choose a client</option>
-                            <option th:each="invoice:${invoiceList}"
-                                    th:value="${invoice.invoiceId}"
-                                    th:text="${invoice.invoiceId}">
-                            </option>
-                        </select>
-                    </div>
-                    <!--<div class="form-group col-md-2">
-                        <label for="valueUnpaidInputInput">Value unpaid from invoice</label>
-                        <input type="text" class="form-control" id="valueUnpaidInput"
-                               placeholder="Enter a quantity"
-                               th:field="*{invoiceLinesTotal}">
-                    </div>-->
                     <br>
                     <br>
                     <div>
