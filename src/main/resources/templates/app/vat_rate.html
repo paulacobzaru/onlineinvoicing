@@ -23,8 +23,9 @@
     <div class="row">
         <div th:insert="/fragments/sidebar :: menu"></div>
         <br>
+        <br>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h3>Vat rates</h3>
+            <h3><strong>Vat rates</strong></h3>
             <p>This page is designed to manage the Vat rates.</p>
             <form action="#" th:action="@{/app/saveVatRate}" th:object="${vatRate}"
                   method="post" id="inputVatRate">
@@ -32,8 +33,7 @@
                     <img src="/img/vatrate.jpg" alt="Vat rates" height="100px">
                     <br>
                     <br>
-                    <div class="container-fluid">
-                        <p>Add a Vat rate bellow.</p>
+                    <p><strong>Add a Vat rate bellow.</strong></p>
                         <div th:if="${message!=null}" class="alert alert-success"
                              th:text="${message}"></div>
                         <input type="hidden" class="form-control" id="vatRateId"
@@ -52,7 +52,7 @@
                     <hr>
                     <table class="table table-hover">
                         <thead>
-                        <tr>
+                        <tr th:align="center">
                             <th class="table-secondary"> Vat rate</th>
                             <th class="table-secondary"> Edit Action</th>
                             <th class="table-secondary"> Delete Action</th>
@@ -63,17 +63,19 @@
                             <td colspan="3"> No Vat rate is available.</td>
                         </tr>
                         <tr th:each="vatRate:${vatRateList}">
-                            <td scope="row"><span th:text="${vatRate.vatRate}"> Vat rate</span></td>
-                            <td><a th:href="@{/app/vat_rate/edit/{vatRateId}(vatRateId=${vatRate.vatRateId})}"> Edit</a></td>
-                            <td><a th:href="@{/app/vat_rate/delete/{vatRateId}(vatRateId=${vatRate.vatRateId})}"> Delete</a>
+                            <td th:align="right" scope="row"><span th:text="${vatRate.vatRate}"> Vat rate</span></td>
+                            <td th:align="center"><a
+                                    th:href="@{/app/vat_rate/edit/{vatRateId}(vatRateId=${vatRate.vatRateId})}">
+                                Edit</a></td>
+                            <td th:align="center"><a
+                                    th:href="@{/app/vat_rate/delete/{vatRateId}(vatRateId=${vatRate.vatRateId})}">
+                                Delete</a></td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
             </form>
         </main>
     </div>
-
 </main>
 </body>
 </html>

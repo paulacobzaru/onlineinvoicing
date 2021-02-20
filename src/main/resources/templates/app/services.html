@@ -25,13 +25,17 @@
         <div th:insert="/fragments/sidebar :: menu"></div>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <br>
+            <br>
             <h3>Services</h3>
             <p>This page is designed to manage your services.</p>
             <form action="#" th:action="@{/app/saveCustomerService}" th:object="${customerService}"
                   method="post" id="customerServiceForm">
                 <div class="form-row">
                     <img src="/img/services.jpg" alt="Register a service" height="100px">
-                    <p>Add a service bellow.</p>
+                    <br>
+                    <br>
+                    <p><strong>Add a service bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="customerServiceId"
@@ -43,22 +47,22 @@
                                th:field="*{serviceName}">
                     </div>
                     <div class="form-group col-md-2">
-                        <label for="vatRate">VAT Rate</label>
-                        <select id="vatRate" class="form-control" th:field="*{vatRate}">
-                            <option selected value="0">Choose a VAT Rate</option>
-                            <option th:each="vatRate:${vatRateList}"
-                                    th:value="${vatRate.vatRateId}"
-                                    th:text="${vatRate.vatRate}">
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
                         <label for="unitType">Unit Type</label>
                         <select id="unitType" class="form-control" th:field="*{unitType}">
                             <option selected value="0">Choose a unit type</option>
                             <option th:each="unitType:${unitTypeList}"
                                     th:value="${unitType.unitTypeId}"
                                     th:text="${unitType.unitName}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="vatRate">VAT Rate</label>
+                        <select id="vatRate" class="form-control" th:field="*{vatRate}">
+                            <option selected value="0">Choose a VAT Rate</option>
+                            <option th:each="vatRate:${vatRateList}"
+                                    th:value="${vatRate.vatRateId}"
+                                    th:text="${vatRate.vatRate}">
                             </option>
                         </select>
                     </div>
@@ -75,8 +79,8 @@
                 <thead>
                     <tr>
                         <th class="table-secondary"> Service Name</th>
-                        <th class="table-secondary"> VAT Rate</th>
                         <th class="table-secondary"> Unit Type</th>
+                        <th class="table-secondary"> VAT Rate</th>
                         <th class="table-secondary"> Edit Action</th>
                         <th class="table-secondary"> Delete Action</th>
                     </tr>
@@ -87,8 +91,8 @@
                     </tr>
                     <tr th:each="customerService : ${customerServiceList}">
                         <td scope="row"><span th:text="${customerService.serviceName}"> Service Name </span></td>
-                        <td scope="row"><span th:text="${customerService.vatRate.vatRate}"> VAT Rate </span></td>
                         <td scope="row"><span th:text="${customerService.unitType.unitName}"> Unit Type </span></td>
+                        <td scope="row"><span th:text="${customerService.vatRate.vatRate}"> VAT Rate </span></td>
                         <td><a th:href="@{/app/services/edit/{serviceId}(serviceId=${customerService.serviceId})}">Edit</a></td>
                         <td><a th:href="@{/app/services/delete/{serviceId}(serviceId=${customerService.serviceId})}">Delete</a></td>
                     </tr>

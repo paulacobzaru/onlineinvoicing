@@ -35,13 +35,13 @@ public class CityController {
     public String editCity(@PathVariable("cityId") int cityId, Model model) {
         model.addAttribute("city", cityService.getCityById(cityId));
         model.addAttribute("cityList", cityService.getAllCities());
-        return "/app/citie";
+        return "/app/cities";
     }
 
     @GetMapping("/app/cities/delete/{cityId}")
     public String deleteCity(@PathVariable("cityId") int cityId, Model model) {
-        cityService.getCityById(cityId);
-        model.addAttribute("message", "Your city is saved!");
+        cityService.deleteCity(cityId);
+        model.addAttribute("message", "Your city is deleted!");
         return "redirect:/app/cities";
     }
 }

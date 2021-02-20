@@ -19,12 +19,13 @@
 </style>
 <div th:insert="/fragments/header :: header"></div>
 
-<main class="container-fluid">
+<div class="container-fluid">
     <div class="row">
         <div th:insert="/fragments/sidebar :: menu"></div>
         <br>
+        <br>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h3 class="form-row">Cities</h3>
+            <h3 class="form-row"><strong>Cities</strong></h3>
             <p class="form-row">This page is designed to manage your cities.</p>
             <form action="#" th:action="@{/app/cities/saveCity}" th:object="${city}"
                   method="post" id="cityId">
@@ -32,13 +33,13 @@
                     <img src="/img/city.jpg" alt="Register a city" height="100px">
                     <br>
                     <br>
-                    <div class="container-fluid">
-                    <p>Add a city bellow.</p>
+                    <p><strong>Add a city bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="cityId"
                            th:field="*{cityId}">
                     <div class="form-group col-md-3">
+                        <label type="cityInput">City</label>
                         <input type="text" class="form-control" id="cityInput"
                                placeholder="Enter a city name"
                                th:field="*{cityName}">
@@ -52,7 +53,7 @@
                         <hr>
                         <table class="table table-hover" style="De:450px">
                             <thead>
-                            <tr align="center">
+                            <tr th:align="center">
                                 <th class="table-secondary"> City name</th>
                                 <th class="table-secondary"> Edit Action</th>
                                 <th class="table-secondary"> Delete Action</th>
@@ -65,16 +66,16 @@
                             <tr th:each="city: ${cityList}">
                                 <td align="center" scope="row"><span th:text="${city.cityName}"> City name </span></td>
                                 <td align="center"><a th:href="@{/app/cities/edit/{cityId}(cityId=${city.cityId})}">Edit</a></td>
-                                <td align="center"><a th:href="@{/app/cities/delete/{cityId}(cityId=${city.cityId})}">Delete</a></td>
+                                <td align="center"><a th:href="@{/app/cities/delete/{cityId}(cityId=${city.cityId})}">Delete</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                 </div>
-                </div>
             </form>
         </main>
     </div>
-        </main>
+</div>
 </body>
 </html>
 

@@ -22,7 +22,6 @@ public class ReportController {
         return productReportService.exportProductReport(format);
     }
 
-
     @GetMapping("/report/invoice/{format}/{invoiceId}")
     public String generatedInvoiceReport(@PathVariable String format, @PathVariable String invoiceId) throws FileNotFoundException, JRException {
         return invoiceReportService.createInvoiceReport(invoiceId, format);

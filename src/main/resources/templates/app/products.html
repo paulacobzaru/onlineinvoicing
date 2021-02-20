@@ -25,13 +25,16 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <br>
-            <h3>Products</h3>
+            <br>
+            <h3><strong>Products</strong></h3>
             <p>This page is designed to manage your products.</p>
             <form action="#" th:action="@{/app/saveProduct}" th:object="${product}"
                   method="post">
                 <div class="form-row">
                     <img src="/img/products.jpg" alt="Products" height="100px">
-                    <p>Add a product bellow.</p>
+                    <br>
+                    <br>
+                    <p><strong>Add a product bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="productId"
@@ -107,6 +110,8 @@
                     <th align="center" class="table-secondary"> Expiration date</th>
                     <th align="center" class="table-secondary"> Edit Action</th>
                     <th align="center" class="table-secondary"> Delete Action</th>
+                    <th align="center" class="table-secondary"> PDF</th>
+                    <th align="center" class="table-secondary"> HTML</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -123,6 +128,8 @@
                     <td align="center" scope="row"><span th:text="${product.expirationDate}"> Date of Expiration</span></td>
                     <td align="center"><a th:href="@{/app/products/edit/{productId}(productId=${product.productId})}"> Edit</a></td>
                     <td align="center"><a th:href="@{/app/products/delete/{productId}(productId=${product.productId})}"> Delete</a></td>
+                    <td scope="row"><a th:href="@{/report/products/pdf/{productId}(productId=${product.productId})}"> PDF</a></td>
+                    <td scope="row"><a th:href="@{/report/products/html/{productId}(productId=${product.productId})}"> HTML</a></td>
                 </tr>
                 </tbody>
             </table>

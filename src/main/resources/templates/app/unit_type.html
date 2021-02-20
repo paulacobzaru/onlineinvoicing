@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/dashboard.css" rel="stylesheet">
@@ -24,16 +24,20 @@
     <div class="row">
         <div th:insert="/fragments/sidebar :: menu"></div>
         <br>
+        <br>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <h3>Unit type</h3>
+            <h3 class="form-row">
+                <bold>Unit type</bold>
+            </h3>
             <p>This page is designed to manage the types of units.</p>
-            <form action="#" th:action="@{/app/unit_type/saveUnitType}" th:object="${unitType}"
+            <form action="#" th:action="@{/app/unit_type/saveUnitType}" th:object="${unit_type}"
                   method="post" id="unitTypeForm">
 
                 <div class="form-row">
                     <img src="/img/unittype.jpg" alt="Register a unit type" height="100px">
                     <br>
-                    <p>Add a unit type bellow.</p>
+                    <br>
+                    <p><strong>Add a unit type bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="unitTypeId"
@@ -48,6 +52,7 @@
                     <br>
                     <button type="submit" value="Save">Submit</button>
                     <button type="button" value="Reset">Reset</button>
+                </div>
                     <hr>
                     <table class="table table-hover" style="width: 450px">
                         <thead th:align="center">
@@ -68,11 +73,9 @@
                         </tr>
                         </tbody>
                     </table>
-                </div>
             </form>
         </main>
     </div>
-
 </main>
 </body>
 </html>

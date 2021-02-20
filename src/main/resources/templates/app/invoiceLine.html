@@ -28,7 +28,6 @@
             <br>
             <h3>Invoices</h3>
             <p>This page is designed to manage your invoices.</p>
-
             <label th:align="right" for="invoice"><strong>Invoice number:</strong></label>
             <p th:text="${invoice.invoiceId}"/>
             <label th:align="right" for="invoice"><strong>Client:</strong></label>
@@ -41,7 +40,6 @@
                 <form action="#" th:action="@{/app/saveInvoiceLine}" th:object="${invoiceLine}"
                       method="post">
                     <img src="/img/invoice-paid.jpg" alt="Invoices" height="100px">
-                    <div class="container-fluid">
                         <br>
                         <p><strong>Add an invoice line bellow.</strong></p>
                         <input type="hidden" class="form-control" id="invoiceLineId" th:field="*{invoiceLineId}" readonly>
@@ -97,9 +95,8 @@
                         <br>
                         <button type="submit" value="Submit">Submit</button>
                         <button type="reset" value="Reset">Reset</button>
-                    </div>
                 </form>
-                </div>
+            </div>
             <hr>
             <table class="table table-hover; row-cols-lg-auto">
                 <thead>

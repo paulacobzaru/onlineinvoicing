@@ -37,7 +37,7 @@ public class CountryController {
         return "/app/countries";
     }
 
-    @GetMapping("/app/countries/delete/{deleteId}")
+    @GetMapping("/app/countries/delete/{countryId}")
     public String deleteCountry(@PathVariable("countryId") int countryId, Model model) {
         countryService.deleteCountry(countryId);
         model.addAttribute("message", "Your country is deleted!");

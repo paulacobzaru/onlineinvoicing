@@ -25,13 +25,16 @@
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
             <br>
-            <h3>Payments</h3>
+            <br>
+            <h3><strong>Payments</strong></h3>
             <p>This page is designed to manage your payments.</p>
             <form action="#" th:action="@{/app/savePayment}" th:object="${payment}"
                   method="post">
                 <div class="form-row">
                     <img src="/img/payment.jpg" alt="Payments" height="100px">
-                    <p>Add a payment bellow.</p>
+                    <br>
+                    <br>
+                    <p><strong>Add a payment bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="productId"
@@ -73,14 +76,14 @@
             <hr>
             <table class="table table-hover; row-cols-lg-auto">
                 <thead>
-                <tr>
-                    <th align="center" class="table-secondary"> Payment type</th>
-                    <th align="center" class="table-secondary"> Client</th>
-                    <th align="center" class="table-secondary"> Value paid</th>
-                    <th align="center" class="table-secondary"> Invoice paid</th>
+                <tr th:align="center">
+                    <th class="table-secondary"> Payment type</th>
+                    <th class="table-secondary"> Client</th>
+                    <th class="table-secondary"> Value paid</th>
+                    <!--<th align="center" class="table-secondary"> Invoice paid</th>-->
                     <!--<th align="center" class="table-secondary"> Value unpaid of invoice</th>-->
-                    <th align="center" class="table-secondary"> Edit Action</th>
-                    <th align="center" class="table-secondary"> Delete Action</th>
+                    <th class="table-secondary"> Edit Action</th>
+                    <th class="table-secondary"> Delete Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -88,16 +91,14 @@
                     <td colspan="8"> No payment is available.</td>
                 </tr>
                 <tr th:each="payment:${paymentList}">
-                    <td align="center" scope="row"><span th:text="${payment.paymentType}"> Product Type</span></td>
-                    <td align="center" scope="row"><span th:text="${client.clientName}"> Client name</span></td>
+                    <td align="center" scope="row"><span th:text="${payment.paymentType.paymentType}"> Product Type</span></td>
+                    <td align="center" scope="row"><span th:text="${payment.client.clientName}"> Client name</span></td>
                     <td align="right" scope="row"><span th:text="${payment.valuePaid}"> Value paid</span></td>
                     <!--<td align="right" scope="row"><span th:text="${invoice.invoiceLine}"> Value unpaid of invoice/<span></td>-->
-                    <td align="center" scope="row"><span th:text="${product.expirationDate}"> Date of Expiration</span>
-                    </td>
-                    <td align="center"><a th:href="@{/app/products/edit/{productId}(productId=${product.productId})}">
+                    <td align="center"><a th:href="@{/app/payments/edit/{paymentId}(paymentId=${payment.paymentId})}">
                         Edit</a>
                     </td>
-                    <td align="center"><a th:href="@{/app/products/delete/{productId}(productId=${product.productId})}">
+                    <td align="center"><a th:href="@{/app/payments/delete/{paymentId}(paymentId=${payment.paymentId})}">
                         Delete</a></td>
                 </tr>
                 </tbody>

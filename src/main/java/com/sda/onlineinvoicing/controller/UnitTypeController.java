@@ -32,15 +32,15 @@ public class UnitTypeController {
     }
 
     @GetMapping("/app/unit_type/edit/{unitTypeId}")
-    public String editUitType(@PathVariable("unitTypeId") int unitTypeId, Model model){
+    public String editUnitType(@PathVariable("unitTypeId") int unitTypeId, Model model){
         model.addAttribute("unitType", unitTypeService.getUnitTypeById(unitTypeId));
         model.addAttribute("unitTypeList",unitTypeService.getAllUnitTypes());
-        return "/app/unit_types";
+        return "/app/unit_type";
     }
 
     @GetMapping("/app/unit_type/delete/{uniTypeId}")
     public String deleteUnitType(@PathVariable("unitTypeId") int unitTypeId, Model model){
-        unitTypeService.getUnitTypeById(unitTypeId);
+        unitTypeService.deleteUnitType(unitTypeId);
         model.addAttribute("message", "Your unit type is saved!");
         return "redirect:/app/unit_type";
     }

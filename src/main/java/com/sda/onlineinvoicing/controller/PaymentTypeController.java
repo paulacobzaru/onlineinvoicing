@@ -17,10 +17,10 @@ public class PaymentTypeController {
     public String invoices(Model model) {
         model.addAttribute("paymentType", new PaymentType());
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
-        return "/app/paymentType";
+        return "/app/payment_type";
     }
 
-    @PostMapping("/app/savePaymentType")
+    @PostMapping("/app/payment_type/savePaymentType")
     public String savePaymentType(Model model, PaymentType paymentType) {
         paymentTypeService.savePaymentType(paymentType);
         model.addAttribute("paymentType", new PaymentType());
@@ -29,17 +29,17 @@ public class PaymentTypeController {
         return "/app/payment_type";
     }
 
-    @GetMapping("/app/payment_type/delete/{paymentTypeId}")
-    public String deletePayment(@PathVariable("paymentTypeId") int paymentTypeId, Model model) {
-        paymentTypeService.deletePaymentType(paymentTypeId);
-        model.addAttribute("message", "Your payment type is deleted!");
-        return "redirect:/app/payment_type";
-    }
-
     @GetMapping("/app/payment_type/edit/{paymentTypeId}")
-    public String getPaymentType(@PathVariable("paymentTypeId") int paymentTypeId, Model model) {
+    public String editPaymentType(@PathVariable("paymentTypeId") int paymentTypeId, Model model) {
         model.addAttribute("paymentType", paymentTypeService.getPaymentTypeById(paymentTypeId));
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         return "/app/payment_type";
+    }
+
+    @GetMapping("/app/payment_type/delete/{paymentTypeId}")
+    public String deletePaymentType(@PathVariable("paymentTypeId") int paymentTypeId, Model model) {
+        paymentTypeService.deletePaymentType(paymentTypeId);
+        model.addAttribute("message", "Your payment type is deleted!");
+        return "redirect:/app/payment_type";
     }
 }

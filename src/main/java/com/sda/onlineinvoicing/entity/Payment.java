@@ -16,7 +16,7 @@ public class Payment {
     private Client client;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "paymentId")
+    @JoinColumn(name = "paymentType")
     private PaymentType paymentType;
 
     @Column

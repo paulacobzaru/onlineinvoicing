@@ -22,10 +22,10 @@
 <div class="container-fluid">
     <div class="row">
         <div th:insert="/fragments/sidebar :: menu"></div>
-
+        <br>
+        <br>
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <br>
-            <h3>Types of payments</h3>
+            <h3><strong>Types of payments</strong></h3>
             <p>This page is designed to manage the types of payments.</p>
             <form action="#" th:action="@{/app/payment_type/savePaymentType}" th:object="${paymentType}"
                   method="post" id="paymentTypeForm">
@@ -33,7 +33,8 @@
                 <div class="form-row">
                     <img src="/img/payment_ype.jpg" alt="Register a payment type" height="100px">
                     <br>
-                    <p>Add a payment type bellow.</p>
+                    <br>
+                    <p><strong>Add a payment type bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
                          th:text="${message}"></div>
                     <input type="hidden" class="form-control" id="paymentTypeId"
@@ -62,17 +63,18 @@
                         <tr th:if="${paymentTypeList.isEmpty()}">
                             <td colspan="3"> No payment type is available.</td>
                         </tr>
-                        <tr  th:align="center" th:each="paymentType: ${payemntTypeList}">
+                        <tr th:align="center" th:each="paymentType: ${payemntTypeList}">
                             <td scope="row"><span th:text="${paymentType.paymentType}"> Payment type</span></td>
-                            <td><a th:href="@{/app/payment_type/edit/{paymentTypeId}(paymentTypeId=${paymentType.paymentTypeId})}">Edit</a></td>
-                            <td><a th:href="@{/app/payment_type/delete/{paymentTypeId}(unitTypeId=${paymentType.paymentTypeId})}">Delete</a></td>
+                            <td>
+                                <a th:href="@{/app/payment_type/edit/{paymentTypeId}(paymentTypeId=${paymentType.paymentTypeId})}">Edit</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/app/payment_type/delete/{paymentTypeId}(unitTypeId=${paymentType.paymentTypeId})}">Delete</a>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
-
-
                 </div>
-    </div>
             </form>
         </main>
     </div>

@@ -57,6 +57,7 @@ public class PaymentController {
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         model.addAttribute("productList", paymentService.getAllPayments());
         model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("paymentList", paymentService.getAllPayments());
         return "/app/payments";
     }
 
