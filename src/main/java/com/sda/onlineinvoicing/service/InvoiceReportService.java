@@ -28,22 +28,27 @@ public class InvoiceReportService {
         Invoice invoice = invoiceService.getInvoiceById(Integer.parseInt(invoiceId));
         List<InvoiceLine> invoiceLines = invoiceLineService.getInvoiceLinesByInvoiceId(Integer.parseInt(invoiceId));
 
+//        String reportsDirPath =getServlet().getServletContext().getRealPath("/")+"D:\\Reports\\"
+//      File reportsDir = new File(reportsDirPath);
+//        if (!reportsDir.exists()) {
+//            try {
+//                throw new FileNotFoundException(String.valueOf(reportsDir));
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//                map.findForward("/InternalError.do");
+//            }
+//        }
+//
+//        HashMap<String,Object> hm = new HashMap<String,Object>();
+//        hm.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
+
         File file = ResourceUtils.getFile("src/main/resources/templates/reports/invoice.jrxml");
         JasperReport jasperProductReport = JasperCompileManager.compileReport(file.getAbsolutePath());
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(invoiceLines);
         Map<String, Object> map = new HashMap<>();
-        User user = invoice.getUser();
-        map.put("userName", user.getCompanyName());
-        map.put("vatNumber", user.getVatNumber());
-        map.put("address", user.getAddress3());
-        map.put("zipCode", user.getZipCode1());
-        map.put("city", user.getCity().getCityName());
-        map.put("country", user.getCountry().getCountryName());
-        map.put("bank", user.getBank());
-        map.put("email", user.getEmail());
+        map.put("user", invoice.getUser());
         map.put("client",invoice.getClient());
-        map.put("invoiceDate",invoice.getInvoiceDate());
-        map.put("invoiceNumber",invoice.getInvoiceId());
+        map.put("invoice",invoice);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperProductReport, map, dataSource);
         if (format.equalsIgnoreCase("html")) {
             JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "invoice_id_" + invoiceId + ".html");
