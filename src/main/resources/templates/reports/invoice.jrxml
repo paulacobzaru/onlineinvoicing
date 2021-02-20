@@ -340,36 +340,9 @@
             </textField>
         </band>
     </detail>
-    <!--  <summary>
-          <band height="20">
-              <staticText>
-                  <reportElement x="0" y="0" width="100" height="20"/>
-                  <box leftPadding="10"/>
-                  <textElement>
-                      <font isBold="true"/>
-                  </textElement>
-                  <text><![CDATA[Total]]></text>
-              </staticText>
-              <textField>
-                  <reportElement x="100" y="0" width="100" height="20"/>
-                  <box leftPadding="10"/>
-                  <textElement>
-                      <font isBold="true" isItalic="true"/>
-                  </textElement>
-                  <textFieldExpression><![CDATA[$V{values}]]></textFieldExpression>
-              </textField>
-          </band>
-      </summary>-->
     <lastPageFooter>
         <band height="177">
-            <staticText>
-                <reportElement x="380" y="0" width="94" height="20" uuid="8c129d7f-95b3-493d-809a-2ecb74fc14e8"/>
-                <text><![CDATA[Total invoice]]></text>
-            </staticText>
-            <textField>
-                <reportElement x="474" y="0" width="79" height="20" uuid="fabb6878-1593-4967-9927-b65f6c489d20"/>
-                <textFieldExpression><![CDATA[$V{total_invoice}]]></textFieldExpression>
-            </textField>
+
             <staticText>
                 <reportElement x="380" y="0" width="94" height="20" uuid="8c129d7f-95b3-493d-809a-2ecb74fc14e8"/>
                 <text><![CDATA[Total invoice]]></text>
@@ -403,4 +376,18 @@
             </textField>-->
         </band>
     </lastPageFooter>
+    <summary >
+        <band height="20">
+            <staticText>
+                <reportElement x="350" y="0" width="94" height="20" />
+                <textElement textAlignment="Right"/>
+                <text ><![CDATA[Total vat]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="450" y="0" width="79" height="20" uuid="fabb6878-1593-4967-9927-b65f6c489d20"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$V{total_vat}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
 </jasperReport>
