@@ -98,6 +98,10 @@
                 </div>
             </form>
             <hr>
+            <a target="_blank" th:href="@{/report/products/pdf}"> Create PDF Report </a>
+            <br>
+            <a target="_blank" th:href="@{/report/products/html}"> Create HTML Report </a>
+            <hr>
             <table class="table table-hover; row-cols-lg-auto">
                 <thead>
                 <tr>
@@ -110,8 +114,6 @@
                     <th align="center" class="table-secondary"> Expiration date</th>
                     <th align="center" class="table-secondary"> Edit Action</th>
                     <th align="center" class="table-secondary"> Delete Action</th>
-                    <th align="center" class="table-secondary"> PDF</th>
-                    <th align="center" class="table-secondary"> HTML</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -128,8 +130,6 @@
                     <td align="center" scope="row"><span th:text="${product.expirationDate}"> Date of Expiration</span></td>
                     <td align="center"><a th:href="@{/app/products/edit/{productId}(productId=${product.productId})}"> Edit</a></td>
                     <td align="center"><a th:href="@{/app/products/delete/{productId}(productId=${product.productId})}"> Delete</a></td>
-                    <td scope="row"><a th:href="@{/report/products/pdf/{productId}(productId=${product.productId})}"> PDF</a></td>
-                    <td scope="row"><a th:href="@{/report/products/html/{productId}(productId=${product.productId})}"> HTML</a></td>
                 </tr>
                 </tbody>
             </table>

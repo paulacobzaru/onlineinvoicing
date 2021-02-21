@@ -2,7 +2,6 @@ package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Invoice;
 import com.sda.onlineinvoicing.entity.InvoiceLine;
-import com.sda.onlineinvoicing.entity.User;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,13 +49,16 @@ public class InvoiceReportService {
         map.put("client",invoice.getClient());
         map.put("invoice",invoice);
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperProductReport, map, dataSource);
+        String message = "Report generated in path: " + path;
         if (format.equalsIgnoreCase("html")) {
             JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "invoice_id_" + invoiceId + ".html");
+            message = message + "invoice_id_" + invoiceId + ".html";
         }
         if (format.equalsIgnoreCase("pdf")) {
             JasperExportManager.exportReportToPdfFile(jasperPrint, path + "invoice_id_" + invoiceId + ".pdf");
+            message = message + "invoice_id_" + invoiceId + ".pdf";
         }
-        return "Report generated in path: " + path;
+        return message;
     }
 
 }

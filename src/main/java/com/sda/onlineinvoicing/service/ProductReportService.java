@@ -29,13 +29,16 @@ public class ProductReportService {
         Map<String, Object> map = new HashMap<>();
         map.put("createdBy", "OIL");
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperProductReport, map, dataSource);
+        String reportMessage = "Report generated in path: " + path;
         if (productReportFormat.equalsIgnoreCase("html")) {
             JasperExportManager.exportReportToHtmlFile(jasperPrint, path + "products.html");
+            reportMessage = reportMessage + "products.html";
         }
         if (productReportFormat.equalsIgnoreCase("pdf")) {
             JasperExportManager.exportReportToPdfFile(jasperPrint, path + "products.pdf");
+            reportMessage = reportMessage + "products.pdf";
         }
-        return "Report generated in path: " + path;
+        return reportMessage;
     }
 
     public String exportInvoiceReport(String invoiceId) {
