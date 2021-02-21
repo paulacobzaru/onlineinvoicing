@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.CustomerService;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.CustomerServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class CustomerServiceServiceImpl implements CustomerServiceService {
     CustomerServiceRepository customerServiceRepository;
 
     @Override
-    public List<CustomerService> getAllCustomerServices() {
-        return customerServiceRepository.findAll();
+    public List<CustomerService> getAllCustomerServices(User user) {
+        return customerServiceRepository.findByUser(user);
     }
 
     //TODO saveService is forgotten

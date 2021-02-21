@@ -22,6 +22,10 @@ public class CustomerService {
     @JoinColumn(name = "unitTypeId")
     public UnitType unitType; //hours
 
+    @OneToOne
+    @JoinColumn(name = "user")
+    public User user;
+
     public int getServiceId() {
         return serviceId;
     }
@@ -54,6 +58,14 @@ public class CustomerService {
         this.unitType = unitType;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "CustomerService{" +
@@ -61,6 +73,7 @@ public class CustomerService {
                 ", serviceName='" + serviceName + '\'' +
                 ", vatRate=" + vatRate +
                 ", unitType=" + unitType +
+                ", user=" + user +
                 '}';
     }
 }

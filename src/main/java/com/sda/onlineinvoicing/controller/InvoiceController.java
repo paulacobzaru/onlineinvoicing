@@ -82,7 +82,7 @@ public class InvoiceController {
         InvoiceLine invoiceLine = new InvoiceLine();
         invoiceLine.setInvoice(invoice);
         model.addAttribute("invoiceLine", invoiceLine);
-        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices());
+        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices(user));
         model.addAttribute("productList", productService.getAllProducts());
         List<InvoiceLine> invoiceLines = invoiceLineService.getInvoiceLinesByInvoiceId(invoice.getInvoiceId());
         model.addAttribute("invoiceLineList", invoiceLines);
@@ -121,7 +121,7 @@ public class InvoiceController {
             unitTypeId=invoiceLine.getProduct().getUnitType().getUnitTypeId();
             invoiceLine.setVatRate(invoiceLine.getProduct().getVatRate().getVatRate());
         }
-        UnitType unitType=unitTypeService.getUnitTypeById(unitTypeId);
+        UnitType unitType = unitTypeService.getUnitTypeById(unitTypeId);
         invoiceLine.setUnitType(unitType);
         invoiceLineService.saveInvoiceLine(invoiceLine);
         InvoiceLine newInvoiceLine = new InvoiceLine();
@@ -129,7 +129,7 @@ public class InvoiceController {
         model.addAttribute("invoiceLine", newInvoiceLine);
         Invoice invoice = invoiceService.getInvoiceById(invoiceLine.getInvoice().getInvoiceId());
         model.addAttribute("invoice", invoice);
-        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices());
+        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices(getUser()));
         model.addAttribute("productList", productService.getAllProducts());
         model.addAttribute("message", "Your invoice line is saved");
         model.addAttribute("invoiceLineList", invoiceLineService.getInvoiceLinesByInvoiceId(invoice.getInvoiceId()));
@@ -151,7 +151,7 @@ public class InvoiceController {
         invoiceLine.setInvoice(invoice);
         model.addAttribute("invoiceLine", invoiceLine);
         model.addAttribute("invoice", invoice);
-        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices());
+        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices(getUser()));
         model.addAttribute("productList", productService.getAllProducts());
         List<InvoiceLine> invoiceLines = invoiceLineService.getInvoiceLinesByInvoiceId(invoice.getInvoiceId());
         model.addAttribute("invoiceLineList", invoiceLines);
@@ -180,6 +180,13 @@ public class InvoiceController {
 
     }
 
+    private User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByEmail(userName);
+        return user;
+    }
+
     @GetMapping("/app/invoiceLine/edit/{invoiceLineId}")
     public String editInvoiceLine(@PathVariable("invoiceLineId") int invoiceLineId, Model model) {
         InvoiceLine invoiceLine = invoiceLineService.getInvoiceLineById(invoiceLineId);
@@ -188,7 +195,7 @@ public class InvoiceController {
         model.addAttribute("invoice", invoice);
         model.addAttribute("invoiceList", invoiceService.getAllInvoices());
         model.addAttribute("productList", productService.getAllProducts());
-        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices());
+        model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices(getUser()));
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
         model.addAttribute("invoiceLineList", invoiceLineService.getInvoiceLinesByInvoiceId(invoice.getInvoiceId()));
         return "/app/invoiceLine";
