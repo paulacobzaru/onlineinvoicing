@@ -64,7 +64,7 @@
                 </tr>
                 <tr align="center" th:each="country:${countryList}">
                     <td scope="row"><span th:text="${country.countryName}">Country name</span></td>
-                    <td><a th:href="@{/app/countries/edit/{countryId}(countrytId=${country.countryId})}"> Edit</a></td>
+                    <td><a th:href="@{/app/countries/edit/{countryId}(countryId=${country.countryId})}"> Edit</a></td>
                     <td><a th:href="@{/app/countries/delete/{countryId}(countryId=${country.countryId})}"> Delete</a>
                     </td>
                 </tr>
