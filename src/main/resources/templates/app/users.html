@@ -87,6 +87,14 @@
                             </div>
                         </div>
                         <div class="form-group col-md-2">
+                            <label for="inputCurrency">Currency</label>
+                            <select id="inputCurrency" class="form-control" th:field="*{currency}">
+                                <option selected value="0">Choose Currency</option>
+                                <option th:each="currency:${currencyList}" th:value="${currency.currencyId}"
+                                        th:text="${currency.currencyName}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
                             <label for="inputBank">Bank</label>
                             <input type="text" class="form-control" id="inputBank"
                                    placeholder="Bank"

@@ -82,7 +82,7 @@ public class UserController {
         return "redirect:/app/users";
     }
 
-    @PostMapping("pages/freetrial/saveUser")
+    @PostMapping("/freetrial/saveUser")
     public String saveFreeTrialUser(Model model, User user) {
         //NOTE method name should be selected correctly and unique
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -96,9 +96,12 @@ public class UserController {
         return "/pages/freetrial";
     }
 
-    @GetMapping("/pages/freetrial")
+    @GetMapping("/freetrial")
     public String freeTrial(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("cityList", cityService.getAllCities());
+        model.addAttribute("countryList", countryService.getAllCountries());
+        model.addAttribute("currencyList", currencyService.getAllCurrencies());
         return "/pages/freetrial";
     }
 }

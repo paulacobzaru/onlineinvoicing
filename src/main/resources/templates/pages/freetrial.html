@@ -93,70 +93,115 @@
     <br>
     <div th:if="${message!=null}" class="alert alert-success" th:text="${message}"></div>
     <div class="container">
-        <form data-toggle="validator" role="form" th:object="${user}" th:action="@{/saveUser}" method="post">
-            <br>
-            <div class="form-group col-md-4">
-                <label for="inputEmail" class="control-label">Email</label>
-                <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="Email"
-                       data-error="Hey, this email is invalid!" required>
-                <div class="help-block with-errors"></div>
-            </div>
-            <br>
-            <div class="form-group col-md-5">
-                <label for="inputPassword" class="control-label">Password</label>
-                <div class="form-inline row">
-                    <div class="form-group col-md-5">
-                        <input th:field="*{password}" type="password" data-minlength="8" class="form-control" id="inputPassword"
-                               placeholder="Password" required>
-                        <div class="help-block">Minimum of 8 characters</div>
+
+        <form action="#" th:action="@{/freetrial/saveUser}" th:object="${user}" method="post">
+            <div class="form-row">
+                <br>
+                <div class="container-fluid">
+                    <div class="form-group col-md-3">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail"
+                               placeholder="Email"
+                               th:field="*{email}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword"
+                               placeholder="Password"
+                               th:field="*{password}">
+                    </div>
+                    <input type="hidden" class="form-control" id="userId"
+                           th:field="*{userId}">
+                    <div class="form-group col-md-3">
+                        <label for="companyNameInput">Supplier name</label>
+                        <input type="text" class="form-control" id="companyNameInput"
+                               placeholder="Enter your company name"
+                               th:field="*{companyName}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="vatCodeInput">Vat Code</label>
+                        <input type="text" class="form-control" id="vatCodeInput"
+                               placeholder="Enter your Vat code"
+                               th:field="*{vatNumber}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputAddress3">Address</label>
+                        <input type="text" class="form-control" id="inputAddress3"
+                               placeholder="Street, number" th:field="*{address3}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZipCode1">Zip</label>
+                        <input type="text" class="form-control" id="inputZipCode1"
+                               placeholder="Enter Zip code"
+                               th:field="*{zipCode1}">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label for="inputCity">City</label>
+                            <select id="inputCity" class="form-control" th:field="*{city}">
+                                <option selected value="0">Choose City</option>
+                                <option th:each="city:${cityList}" th:value="${city.cityId}"
+                                        th:text="${city.cityName}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputCountry">Country</label>
+                            <select id="inputCountry" class="form-control" th:field="*{country}">
+                                <option selected value="0">Choose Country</option>
+                                <option th:each="country:${countryList}"
+                                        th:value="${country.countryId}"
+                                        th:text="${country.countryName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputCurrency">Currency</label>
+                        <select id="inputCurrency" class="form-control" th:field="*{currency}">
+                            <option selected value="0">Choose Currency</option>
+                            <option th:each="currency:${currencyList}" th:value="${currency.currencyId}"
+                                    th:text="${currency.currencyName}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputBank">Bank</label>
+                        <input type="text" class="form-control" id="inputBank"
+                               placeholder="Bank"
+                               th:field="*{bank}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputAccount">Account number</label>
+                        <input type="text" class="form-control" id="inputAccount"
+                               placeholder="Account number"
+                               th:field="*{accountNumber}">
+                    </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="inputSortCode">Sort Code</label>
+                        <input type="text" class="form-control" id="inputSortCode"
+                               placeholder="Account sort-code"
+                               data-th-formaction="00-00-00"
+                               th:field="*{SortCode}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="telephoneInput">Telephone</label>
+                        <input type="tel" class="form-control" id="telephoneInput"
+                               placeholder="Enter a telephone number"
+                               th:field="*{telephone}">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputWebsite">Website</label>
+                        <input type="text" class="form-control" id="inputWebsite"
+                               placeholder="Website"
+                               th:field="*{website}">
                     </div>
                     <br>
                     <br>
-                    <!--<label for="inputPassword" class="control-label">Confirm password</label>-->
-                    <!--div class="form-group col-md-5">
-                        <input type="password" class="form-control" id="inputPasswordConfirm"
-                               data-match="#inputPassword" data-match-error="Whoops, these don't match"
-                               placeholder="Confirm password" required>
-                        <div class="help-block with-errors"></div>
-                    </div-->
+                    <button type="submit" value="Submit">Submit</button>
+                    <button type="reset" value="Reset">Reset</button>
                 </div>
             </div>
-            <br>
+        </form>
 
-            <!--<div class="form-group">
-                <label for="inputRadio" class="control-label">Chose what you are:</label>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="name" required>
-                        Free lancer
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="name" required>
-                        Company
-                    </label>
-                </div>
-            </div>-->
-            <br>
-            <div class="form-group">
-                <label for="inputCheckBox" class="control-label">Pay attention again!</label>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>
-                        Check yourself!
-                    </label>
-                    <div class="help-block with-errors"></div>
-                </div>
-            </div>
-            <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <br>
-            </div>
-            <br>
-            <p><a style="right:auto" ; class="btn btn-primary ; float-end" href="/app/users" role="button"> Continue!</a></p>
-              </form>
         <br>
     </div>
     <hr>
