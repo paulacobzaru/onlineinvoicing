@@ -42,16 +42,8 @@ public class CustomerServiceController {
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         return "/app/services";
     }
-
-    @GetMapping("/app/services/delete/{serviceId}")
-    public String deleteService(@PathVariable("serviceId") int serviceId, Model model) {
-        customerServiceService.deleteCustomerService(serviceId);
-        model.addAttribute("message", "Your service is deleted!");
-        return "redirect:/app/services";
-    }
-
     @GetMapping("/app/services/edit/{serviceId}")
-    public String getService(@PathVariable("serviceId") int serviceId, Model model) {
+    public String editService(@PathVariable("serviceId") int serviceId, Model model) {
         model.addAttribute("customerService", customerServiceService.getCustomerServiceById(serviceId));
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
         model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices());
@@ -59,4 +51,10 @@ public class CustomerServiceController {
         return "/app/services";
     }
 
+    @GetMapping("/app/services/delete/{serviceId}")
+    public String deleteService(@PathVariable("serviceId") int serviceId, Model model) {
+        customerServiceService.deleteCustomerService(serviceId);
+        model.addAttribute("message", "Your service is deleted!");
+        return "redirect:/app/services";
+    }
 }

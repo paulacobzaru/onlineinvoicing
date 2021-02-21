@@ -37,18 +37,18 @@ public class CountryController {
         return "/app/countries";
     }
 
-    @GetMapping("/app/countries/delete/{countryId}")
-    public String deleteCountry(@PathVariable("countryId") int countryId, Model model) {
-        countryService.deleteCountry(countryId);
-        model.addAttribute("message", "Your country is deleted!");
-        return "redirect:/app/countries";
-    }
-
     @GetMapping("/app/countries/edit/{countryId}")
     public String getCountry(@PathVariable("countryId") int countryId, Model model){
         model.addAttribute("country", countryService.getCountryById(countryId));
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());
         return "/app/countries";
+    }
+
+    @GetMapping("/app/countries/delete/{countryId}")
+    public String deleteCountry(@PathVariable("countryId") int countryId, Model model) {
+        countryService.deleteCountry(countryId);
+        model.addAttribute("message", "Your country is deleted!");
+        return "redirect:/app/countries";
     }
 }

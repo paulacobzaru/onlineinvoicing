@@ -22,7 +22,7 @@ public class UnitTypeController {
         return "/app/unit_type";
     }
 
-    @PostMapping("/app/unit_type/saveUnitType")
+    @PostMapping("/app/saveUnitType")
     public String saveUnitType(Model model, UnitType unitType) {
         unitTypeService.saveUnitType(unitType);
         model.addAttribute("unitType", new UnitType());
@@ -38,7 +38,7 @@ public class UnitTypeController {
         return "/app/unit_type";
     }
 
-    @GetMapping("/app/unit_type/delete/{uniTypeId}")
+    @GetMapping("/app/unit_type/delete/{unitTypeId}")
     public String deleteUnitType(@PathVariable("unitTypeId") int unitTypeId, Model model){
         unitTypeService.deleteUnitType(unitTypeId);
         model.addAttribute("message", "Your unit type is saved!");

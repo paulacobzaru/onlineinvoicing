@@ -30,12 +30,11 @@
                 <bold>Unit type</bold>
             </h3>
             <p>This page is designed to manage the types of units.</p>
-            <form action="#" th:action="@{/app/unit_type/saveUnitType}" th:object="${unit_type}"
+            <form action="#" th:action="@{/app/unit_type/saveUnitType}" th:object="${unitType}"
                   method="post" id="unitTypeForm">
 
                 <div class="form-row">
                     <img src="/img/unittype.jpg" alt="Register a unit type" height="100px">
-                    <br>
                     <br>
                     <p><strong>Add a unit type bellow.</strong></p>
                     <div th:if="${message!=null}" class="alert alert-success"
@@ -48,7 +47,6 @@
                                placeholder="Enter unit type"
                                th:field="*{unitName}">
                     </div>
-                    <br>
                     <br>
                     <button type="submit" value="Save">Submit</button>
                     <button type="button" value="Reset">Reset</button>
