@@ -102,10 +102,10 @@
                     <td scope="row"><a th:href="@{/app/invoices/delete/{invoiceId}(invoiceId=${invoice.invoiceId})}">
                         Delete</a>
                     </td>
-                    <td scope="row"><a th:href="@{/report/invoice/pdf/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                    <td scope="row"><a target="_blank" th:href="@{/report/invoice/pdf/{invoiceId}(invoiceId=${invoice.invoiceId})}">
                         PDF</a>
                     </td>
-                    <td scope="row"><a th:href="@{/report/invoice/html/{invoiceId}(invoiceId=${invoice.invoiceId})}">
+                    <td scope="row"><a target="_blank" th:href="@{/report/invoice/html/{invoiceId}(invoiceId=${invoice.invoiceId})}">
                         HTML</a>
                     </td>
                 </tr>
