@@ -181,7 +181,7 @@ public class InvoiceController {
     }
 
     @GetMapping("/app/invoiceLine/edit/{invoiceLineId}")
-    public String getInvoiceLine(@PathVariable("invoiceLineId") int invoiceLineId, Model model) {
+    public String editInvoiceLine(@PathVariable("invoiceLineId") int invoiceLineId, Model model) {
         InvoiceLine invoiceLine = invoiceLineService.getInvoiceLineById(invoiceLineId);
         model.addAttribute("invoiceLine", invoiceLine);
         Invoice invoice = invoiceLine.getInvoice();

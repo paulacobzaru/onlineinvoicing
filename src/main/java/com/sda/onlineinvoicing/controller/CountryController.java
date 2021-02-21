@@ -38,7 +38,7 @@ public class CountryController {
     }
 
     @GetMapping("/app/countries/edit/{countryId}")
-    public String getCountry(@PathVariable("countryId") int countryId, Model model){
+    public String editCountry(@PathVariable("countryId") int countryId, Model model){
         model.addAttribute("country", countryService.getCountryById(countryId));
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());

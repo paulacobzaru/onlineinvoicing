@@ -16,7 +16,7 @@ public class PaymentTypeController {
     PaymentTypeService paymentTypeService;
 
     @GetMapping("/app/payment_type")
-    public String invoices(Model model) {
+    public String paymentTypes(Model model) {
         model.addAttribute("paymentType", new PaymentType());
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         return "/app/payment_type";

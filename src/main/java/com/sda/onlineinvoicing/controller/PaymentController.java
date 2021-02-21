@@ -25,7 +25,7 @@ public class PaymentController {
     PaymentTypeService paymentTypeService;
 
     @GetMapping("/app/payments")
-    public String invoices(Model model) {
+    public String payment(Model model) {
         model.addAttribute("payment", new Payment());
         model.addAttribute("clientList", clientService.getAllClients());
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
@@ -52,7 +52,7 @@ public class PaymentController {
     }
 
     @GetMapping("/app/payments/edit/{paymentId}")
-    public String getPayment(@PathVariable("paymentId") int paymentId, Model model) {
+    public String editPayment(@PathVariable("paymentId") int paymentId, Model model) {
         model.addAttribute("payment", paymentService.getPaymentById(paymentId));
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         model.addAttribute("productList", paymentService.getAllPayments());

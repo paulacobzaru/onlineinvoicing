@@ -50,7 +50,7 @@ public class ClientController {
     }
 
     @GetMapping("/app/clients/edit/{clientId}")
-    public String getClient(@PathVariable("clientId") int clientId, Model model){
+    public String editClient(@PathVariable("clientId") int clientId, Model model){
         model.addAttribute("client", clientService.getClientById(clientId));
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());

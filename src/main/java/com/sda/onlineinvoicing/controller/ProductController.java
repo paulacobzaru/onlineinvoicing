@@ -56,7 +56,7 @@ public class ProductController {
     }
 
     @GetMapping("/app/products/edit/{productId}")
-    public String getProduct(@PathVariable("productId") int productId, Model model) {
+    public String editProduct(@PathVariable("productId") int productId, Model model) {
         model.addAttribute("product", productService.getProductById(productId));
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
         model.addAttribute("productList", productService.getAllProducts());

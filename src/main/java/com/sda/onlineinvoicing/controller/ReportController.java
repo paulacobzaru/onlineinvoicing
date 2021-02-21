@@ -18,12 +18,12 @@ public class ReportController {
     private InvoiceReportService invoiceReportService;
 
     @GetMapping("/report/products/{format}")
-    public String generatedReport(@PathVariable String format) throws FileNotFoundException, JRException {
+    public String generateReport(@PathVariable String format) throws FileNotFoundException, JRException {
         return productReportService.exportProductReport(format);
     }
 
     @GetMapping("/report/invoice/{format}/{invoiceId}")
-    public String generatedInvoiceReport(@PathVariable String format, @PathVariable String invoiceId) throws FileNotFoundException, JRException {
+    public String generateInvoiceReport(@PathVariable String format, @PathVariable String invoiceId) throws FileNotFoundException, JRException {
         return invoiceReportService.createInvoiceReport(invoiceId, format);
 
     }
