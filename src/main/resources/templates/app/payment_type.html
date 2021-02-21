@@ -43,7 +43,7 @@
                         <label for="paymentTypeInput">Payment type</label>
                         <input type="text" class="form-control" id="paymentTypeInput"
                                placeholder="Enter payment type"
-                               th:field="*{paymentType}">
+                               th:field="*{paymentTypeName}">
                     </div>
                     <br>
                     <br>
@@ -63,13 +63,13 @@
                         <tr th:if="${paymentTypeList.isEmpty()}">
                             <td colspan="3"> No payment type is available.</td>
                         </tr>
-                        <tr th:align="center" th:each="paymentType: ${payemntTypeList}">
-                            <td scope="row"><span th:text="${paymentType.paymentType}"> Payment type</span></td>
+                        <tr th:align="center" th:each="paymentType: ${paymentTypeList}">
+                            <td scope="row"><span th:text="${paymentType.paymentTypeName}"> Payment type</span></td>
                             <td>
                                 <a th:href="@{/app/payment_type/edit/{paymentTypeId}(paymentTypeId=${paymentType.paymentTypeId})}">Edit</a>
                             </td>
                             <td>
-                                <a th:href="@{/app/payment_type/delete/{paymentTypeId}(unitTypeId=${paymentType.paymentTypeId})}">Delete</a>
+                                <a th:href="@{/app/payment_type/delete/{paymentTypeId}(paymentTypeId=${paymentType.paymentTypeId})}">Delete</a>
                             </td>
                         </tr>
                         </tbody>

@@ -12,7 +12,7 @@ public class PaymentType {
     private int paymentTypeId;
 
     @Column(length = 50)
-    private String paymentType;
+    private String paymentTypeName;
 
     public int getPaymentTypeId() {
         return paymentTypeId;
@@ -22,19 +22,19 @@ public class PaymentType {
         this.paymentTypeId = paymentTypeId;
     }
 
-    public String getPaymentType() {
-        return paymentType;
+    public String getPaymentTypeName() {
+        return paymentTypeName;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+    public void setPaymentTypeName(String paymentTypeName) {
+        this.paymentTypeName = paymentTypeName;
     }
 
     @Override
     public String toString() {
         return "PaymentType{" +
                 "paymentTypeId=" + paymentTypeId +
-                ", paymentType='" + paymentType + '\'' +
+                ", paymentTypeName='" + paymentTypeName + '\'' +
                 '}';
     }
 }
