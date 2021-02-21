@@ -45,7 +45,7 @@
                             <option selected value="0">Choose a payment type</option>
                             <option th:each="paymentType:${paymentTypeList}"
                                     th:value="${paymentType.paymentTypeId}"
-                                    th:text="${paymentType.paymentType}">
+                                    th:text="${paymentType.paymentTypeName}">
                             </option>
                         </select>
                     </div>
@@ -91,7 +91,7 @@
                     <td colspan="8"> No payment is available.</td>
                 </tr>
                 <tr th:each="payment:${paymentList}">
-                    <td align="center" scope="row"><span th:text="${payment.paymentType.paymentType}"> Product Type</span></td>
+                    <td align="center" scope="row"><span th:text="${payment.paymentType.paymentTypeName}"> Product Type</span></td>
                     <td align="center" scope="row"><span th:text="${payment.client.clientName}"> Client name</span></td>
                     <td align="right" scope="row"><span th:text="${payment.valuePaid}"> Value paid</span></td>
                     <!--<td align="right" scope="row"><span th:text="${invoice.invoiceLine}"> Value unpaid of invoice/<span></td>-->
