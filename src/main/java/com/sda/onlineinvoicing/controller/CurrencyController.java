@@ -31,7 +31,7 @@ public class CurrencyController {
         return "/app/currencies";
     }
 
-    @GetMapping("/app/currencies/edit/{currencyId")
+    @GetMapping("/app/currencies/edit/{currencyId}")
     public String editCurrency(@PathVariable("currencyId") int currencyId, Model model){
         model.addAttribute("currency", currencyService.getCurrencyById(currencyId));
         model.addAttribute("currencyList", currencyService.getAllCurrencies());
@@ -40,7 +40,7 @@ public class CurrencyController {
 
     @GetMapping("/app/currencies/delete/{currencyId}")
     public String deleteCurrency(@PathVariable("currencyId") int currencyId, Model model){
-        currencyService.getCurrencyById(currencyId);
+        currencyService.deleteCurrency(currencyId);
         model.addAttribute("message", "Your currency is deleted!");
         return "redirect:/app/currencies";
     }
