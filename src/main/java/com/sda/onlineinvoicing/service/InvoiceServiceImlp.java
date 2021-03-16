@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Invoice;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class InvoiceServiceImlp implements InvoiceService {
 
 
     @Override
-    public List<Invoice> getAllInvoices() {
-        return invoiceRepository.findAll();
+    public List<Invoice> getAllInvoices(User user) {
+        return invoiceRepository.findByUser(user);
     }
 
     @Override

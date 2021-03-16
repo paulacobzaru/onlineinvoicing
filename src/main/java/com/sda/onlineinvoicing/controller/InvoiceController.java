@@ -49,7 +49,7 @@ public class InvoiceController {
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());
         model.addAttribute("currencyList", currencyService.getAllCurrencies());
-        model.addAttribute("invoiceList", invoiceService.getAllInvoices());
+        model.addAttribute("invoiceList", invoiceService.getAllInvoices(getUser()));
         return "/app/invoices";}
     @PostMapping("/app/saveInvoice")
     public String saveInvoice(Model model, Invoice invoice) {
@@ -76,7 +76,7 @@ public class InvoiceController {
     public String getInvoice(@PathVariable("invoiceId") int invoiceId, Model model) {
         model.addAttribute("invoice", invoiceService.getInvoiceById(invoiceId));
         model.addAttribute("clientList", clientService.getAllClients());
-        model.addAttribute("invoiceList", invoiceService.getAllInvoices());
+        model.addAttribute("invoiceList", invoiceService.getAllInvoices(getUser()));
         return "/app/invoices";}
     @GetMapping("/app/invoices/delete/{invoiceId}")
     public String deleteInvoice(@PathVariable("invoiceId") int invoiceId, Model model, RedirectAttributes redirectAttributes) {
@@ -159,7 +159,7 @@ public class InvoiceController {
         model.addAttribute("invoiceLine", invoiceLine);
         Invoice invoice = invoiceLine.getInvoice();
         model.addAttribute("invoice", invoice);
-        model.addAttribute("invoiceList", invoiceService.getAllInvoices());
+        model.addAttribute("invoiceList", invoiceService.getAllInvoices(getUser()));
         model.addAttribute("productList", productService.getAllProducts(getUser()));
         model.addAttribute("customerServiceList", customerServiceService.getAllCustomerServices(getUser()));
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
