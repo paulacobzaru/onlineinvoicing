@@ -41,6 +41,10 @@ public class Product {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date expirationDate; //can be any time in the future
 
+    @OneToOne
+    @JoinColumn(name = "user")
+    public User user;
+
     public int getProductId() {
         return productId;
     }
@@ -105,6 +109,14 @@ public class Product {
         this.expirationDate = expirationDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -116,6 +128,7 @@ public class Product {
                 ", acquisitionPrice=" + acquisitionPrice +
                 ", dateOfAcquisition=" + dateOfAcquisition +
                 ", expirationDate=" + expirationDate +
+                ", user=" + user +
                 '}';
     }
 }

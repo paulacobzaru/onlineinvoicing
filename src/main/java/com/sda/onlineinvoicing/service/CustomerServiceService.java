@@ -8,7 +8,6 @@ import java.util.List;
 public interface CustomerServiceService {
 
     List<CustomerService> getAllCustomerServices(User user);
-
     //TODO method should be in interface
     void saveCustomerService(CustomerService customerService);
 

@@ -1,12 +1,12 @@
 package com.sda.onlineinvoicing.controller;
 
 import com.sda.onlineinvoicing.entity.Product;
-import com.sda.onlineinvoicing.service.ProductReportService;
-import com.sda.onlineinvoicing.service.ProductService;
-import com.sda.onlineinvoicing.service.UnitTypeService;
-import com.sda.onlineinvoicing.service.VatRateService;
+import com.sda.onlineinvoicing.entity.User;
+import com.sda.onlineinvoicing.service.*;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,22 +28,26 @@ public class ProductController {
     @Autowired
     VatRateService vatRateService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/app/products")
     public String products(Model model){
         model.addAttribute("product",new Product());
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
-        model.addAttribute("productList", productService.getAllProducts());
+        model.addAttribute("productList", productService.getAllProducts(getUser()));
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         return "/app/products";
     }
 
     @PostMapping("/app/saveProduct")
     public String saveProduct(Model model, Product product){
+        product.setUser(getUser());
         productService.saveProduct(product);
         model.addAttribute("product", new Product());
         model.addAttribute("message", "Your product is saved!");
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
-        model.addAttribute("productList", productService.getAllProducts());
+        model.addAttribute("productList", productService.getAllProducts(getUser()));
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         return "/app/products";
     }
@@ -59,9 +63,16 @@ public class ProductController {
     public String editProduct(@PathVariable("productId") int productId, Model model) {
         model.addAttribute("product", productService.getProductById(productId));
         model.addAttribute("unitTypeList", unitTypeService.getAllUnitTypes());
-        model.addAttribute("productList", productService.getAllProducts());
+        model.addAttribute("productList", productService.getAllProducts(getUser()));
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         return "/app/products";
+    }
+
+    private User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByEmail(userName);
+        return user;
     }
 
 }

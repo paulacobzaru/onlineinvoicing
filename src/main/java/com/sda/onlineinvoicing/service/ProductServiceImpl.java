@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Product;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<Product> getAllProducts(User user) {
+        return productRepository.findByUser(user);
     }
 
     //TODO method does not exist in ProductService interface
