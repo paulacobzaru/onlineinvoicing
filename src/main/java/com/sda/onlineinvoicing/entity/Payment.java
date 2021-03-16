@@ -22,6 +22,10 @@ public class Payment {
     @Column
     private BigDecimal valuePaid;
 
+    @OneToOne
+    @JoinColumn(name = "user")
+    public User user;
+
     public int getPaymentId() {
         return paymentId;
     }
@@ -54,6 +58,15 @@ public class Payment {
         this.valuePaid = valuePaid;
     }
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Payment{" +
@@ -61,6 +74,7 @@ public class Payment {
                 ", client=" + client +
                 ", paymentType=" + paymentType +
                 ", valuePaid=" + valuePaid +
+                ", user=" + user +
                 '}';
     }
 }

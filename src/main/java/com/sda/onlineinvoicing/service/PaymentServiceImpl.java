@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Payment;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,8 @@ public class PaymentServiceImpl implements PaymentService {
 
 
     @Override
-    public List<Payment> getAllPayments() {
-        return paymentRepository.findAll();
+    public List<Payment> getAllPayments(User user) {
+        return paymentRepository.findByUser(user);
     }
 
     @Override

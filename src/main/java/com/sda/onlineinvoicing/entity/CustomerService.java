@@ -24,7 +24,7 @@ public class CustomerService {
 
     @OneToOne
     @JoinColumn(name = "user")
-    public User user;
+    private User user;
 
     public int getServiceId() {
         return serviceId;

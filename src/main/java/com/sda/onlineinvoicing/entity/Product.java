@@ -43,7 +43,7 @@ public class Product {
 
     @OneToOne
     @JoinColumn(name = "user")
-    public User user;
+    private User user;
 
     public int getProductId() {
         return productId;
