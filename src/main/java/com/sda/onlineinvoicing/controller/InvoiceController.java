@@ -45,7 +45,7 @@ public class InvoiceController {
     public String invoice(Model model) {
         model.addAttribute("invoice", new Invoice());
         model.addAttribute("userList", userService.getAllUsers());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());
         model.addAttribute("currencyList", currencyService.getAllCurrencies());
@@ -75,7 +75,7 @@ public class InvoiceController {
     @GetMapping("/app/invoices/edit/{invoiceId}")
     public String getInvoice(@PathVariable("invoiceId") int invoiceId, Model model) {
         model.addAttribute("invoice", invoiceService.getInvoiceById(invoiceId));
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         model.addAttribute("invoiceList", invoiceService.getAllInvoices(getUser()));
         return "/app/invoices";}
     @GetMapping("/app/invoices/delete/{invoiceId}")

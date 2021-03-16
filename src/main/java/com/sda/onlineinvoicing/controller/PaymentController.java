@@ -34,7 +34,7 @@ public class PaymentController {
     @GetMapping("/app/payments")
     public String payment(Model model) {
         model.addAttribute("payment", new Payment());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         model.addAttribute("paymentList", paymentService.getAllPayments(getUser()));
         return "/app/payments";
@@ -47,7 +47,7 @@ public class PaymentController {
         model.addAttribute("payment", new Payment());
         model.addAttribute("message", "Your payment is created!");
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         model.addAttribute("paymentList", paymentService.getAllPayments(getUser()));
         return "/app/payments";
     }
@@ -64,7 +64,7 @@ public class PaymentController {
         model.addAttribute("payment", paymentService.getPaymentById(paymentId));
         model.addAttribute("paymentTypeList", paymentTypeService.getAllPaymentTypes());
         model.addAttribute("productList", paymentService.getAllPayments(getUser()));
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         model.addAttribute("paymentList", paymentService.getAllPayments(getUser()));
         return "/app/payments";
     }

@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Client;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,8 @@ public class ClientServiceImpl implements ClientService {
     ClientRepository clientRepository;
 
     @Override
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    public List<Client> getAllClients(User user) {
+        return clientRepository.findByUser(user);
     }
 
     @Override

@@ -49,6 +49,10 @@ public class Client {
     @Column(length = 50)
     private String accountSortCode;
 
+    @OneToOne
+    @JoinColumn(name = "user")
+    public User user;
+
     public int getClientId() {
         return clientId;
     }
@@ -153,6 +157,14 @@ public class Client {
         this.accountSortCode = accountSortCode;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
@@ -169,6 +181,7 @@ public class Client {
                 ", bank='" + bank + '\'' +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", accountSortCode='" + accountSortCode + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

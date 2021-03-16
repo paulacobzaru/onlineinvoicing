@@ -1,10 +1,14 @@
 package com.sda.onlineinvoicing.controller;
 
 import com.sda.onlineinvoicing.entity.Client;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.service.CityService;
 import com.sda.onlineinvoicing.service.ClientService;
 import com.sda.onlineinvoicing.service.CountryService;
+import com.sda.onlineinvoicing.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,23 +26,27 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/app/clients")
     public String clients(Model model) {
         model.addAttribute("client", new Client());
         model.addAttribute("countryList", countryService.getAllCountries());
         model.addAttribute("cityList", cityService.getAllCities());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         return "/app/clients";
     }
 
     @PostMapping("/app/saveClient")
     public String saveClient(Model model, Client client) {
+        client.setUser(getUser());
         clientService.saveClient(client);
         model.addAttribute("client", new Client());
         model.addAttribute("message", "Your client is saved!");
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         return "/app/clients";
     }
 
@@ -54,7 +62,15 @@ public class ClientController {
         model.addAttribute("client", clientService.getClientById(clientId));
         model.addAttribute("cityList", cityService.getAllCities());
         model.addAttribute("countryList", countryService.getAllCountries());
-        model.addAttribute("clientList", clientService.getAllClients());
+        model.addAttribute("clientList", clientService.getAllClients(getUser()));
         return "/app/clients";
     }
+
+    private User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByEmail(userName);
+        return user;
+    }
+
 }
