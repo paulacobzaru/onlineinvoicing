@@ -44,16 +44,21 @@ public class UserController {
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         model.addAttribute("user", new User());
         model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("authorities", authoritiesService.getAll());
         return "/app/users";
     }
 
     @PostMapping("/app/saveUser")
     public String saveUser(Model model, User user) {
         //NOTE a default random password can be generated here
-        user.setPassword(passwordEncoder.encode("123456"));
-        Set<Authority> authorities = new HashSet<>();
-        authorities.add(authoritiesService.getAuthorities("USER"));
-        user.setRoles(authorities);
+        if(user.getUserId()==0) {
+            user.setPassword(passwordEncoder.encode("123456"));
+        }else{
+            user.setPassword(userService.getUserById(user.getUserId()).getPassword());
+        }
+//        Set<Authority> authorities = new HashSet<>();
+//        authorities.add(authoritiesService.getAuthorities("USER"));
+//        user.setAuthority(authoritiesService.getAuthorities("USER"));
         userService.saveUser(user);
         model.addAttribute("user", new User());
         model.addAttribute("message", "The user is created!");
@@ -71,6 +76,7 @@ public class UserController {
         model.addAttribute("currencyList", currencyService.getAllCurrencies());
         model.addAttribute("vatRateList", vatRateService.getAllVatRates());
         model.addAttribute("userList", userService.getAllUsers());
+        model.addAttribute("authorities", authoritiesService.getAll());
         return "/app/users";
     }
 
@@ -87,9 +93,7 @@ public class UserController {
         //NOTE method name should be selected correctly and unique
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         //we encode user password
-        Set<Authority> authorities = new HashSet<>();
-        authorities.add(authoritiesService.getAuthorities("FREETRIAL"));
-        user.setRoles(authorities);
+        user.setAuthority(authoritiesService.getAuthorities("FREETRIAL"));
         userService.saveUser(user);
         model.addAttribute("user", new User());
         model.addAttribute("message", "The free trial user is created!");

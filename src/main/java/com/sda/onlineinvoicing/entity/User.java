@@ -2,9 +2,7 @@ package com.sda.onlineinvoicing.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -62,22 +60,22 @@ public class User {
     @Column(length = 100)
     private String website;
 
-//    @OneToMany(mappedBy = "authorities")
-//    private List<Authority> authorities;
+    @OneToOne
+    private Authority authority;
 
 //    @OneToMany(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "roleId")
 //    private Role role;
 
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-
-    )
-    private Set<Authority> roles = new HashSet<>();
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id")
+//
+//    )
+//    private Set<Authority> roles = new HashSet<>();
 
 
     @Column
@@ -203,12 +201,12 @@ public class User {
         this.website = website;
     }
 
-    public Set<Authority> getRoles() {
-        return roles;
+    public Authority getAuthority() {
+        return authority;
     }
 
-    public void setRoles(Set<Authority> roles) {
-        this.roles = roles;
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
     }
 
     public short getEnabled() {
@@ -237,7 +235,7 @@ public class User {
                 ", sortCode='" + sortCode + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", website='" + website + '\'' +
-                ", roles=" + roles +
+                ", authority=" + authority +
                 ", enabled=" + enabled +
                 '}';
     }
