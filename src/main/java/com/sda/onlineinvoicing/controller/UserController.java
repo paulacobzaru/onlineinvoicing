@@ -1,16 +1,17 @@
 package com.sda.onlineinvoicing.controller;
 
-import com.sda.onlineinvoicing.entity.Authority;
+import com.sda.onlineinvoicing.entity.Subscription;
 import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.time.LocalDate;
 
 @Controller
 public class UserController {
@@ -35,6 +36,9 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     @GetMapping("/app/users")
     public String users(Model model) {
@@ -95,6 +99,13 @@ public class UserController {
         //we encode user password
         user.setAuthority(authoritiesService.getAuthorities("FREETRIAL"));
         userService.saveUser(user);
+        Subscription subscription = new Subscription();
+        subscription.setUser(user);
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now().plusDays(30);
+        subscription.setStartDate(startDate);
+        subscription.setEndDate(endDate);
+        subscriptionService.saveSubscription(subscription);
         model.addAttribute("user", new User());
         model.addAttribute("message", "The free trial user is created!");
         return "/pages/freetrial";
