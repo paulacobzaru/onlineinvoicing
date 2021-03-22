@@ -4,6 +4,8 @@ import com.sda.onlineinvoicing.entity.Subscription;
 import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,12 @@ public class UserController {
         model.addAttribute("userList", userService.getAllUsers());
         model.addAttribute("authorities", authoritiesService.getAll());
         return "/app/users";
+    }
+
+    @GetMapping("/app")
+    public String appIndex(Model model) {
+        model.addAttribute("subscription", subscriptionService.getSubscriptionByUserId(getUser()));
+        return "/app/index";
     }
 
     @PostMapping("/app/saveUser")
@@ -118,5 +126,12 @@ public class UserController {
         model.addAttribute("countryList", countryService.getAllCountries());
         model.addAttribute("currencyList", currencyService.getAllCurrencies());
         return "/pages/freetrial";
+    }
+
+    private User getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByEmail(userName);
+        return user;
     }
 }

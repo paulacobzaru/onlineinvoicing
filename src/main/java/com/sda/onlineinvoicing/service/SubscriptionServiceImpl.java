@@ -1,6 +1,7 @@
 package com.sda.onlineinvoicing.service;
 
 import com.sda.onlineinvoicing.entity.Subscription;
+import com.sda.onlineinvoicing.entity.User;
 import com.sda.onlineinvoicing.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,5 +14,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     @Override
     public void saveSubscription(Subscription subscription) {
         subscriptionRepository.save(subscription);
+    }
+
+    @Override
+    public Subscription getSubscriptionByUserId(User user) {
+        return subscriptionRepository.findByUser(user);
     }
 }

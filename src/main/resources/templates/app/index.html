@@ -26,6 +26,11 @@
             <br>
             <div sec:authorize="hasAuthority('FREETRIAL')">
                 This is a free trial. Please become a user before expiration.
+                <span th:text="${subscription.endDate}"></span>
+            </div>
+            <div sec:authorize="hasAuthority('USER')">
+                Your subscription will expire at
+                <span th:text="${subscription.endDate}"></span>
             </div>
             <br>
             <h3>Online Invoicing Laboratory</h3>
