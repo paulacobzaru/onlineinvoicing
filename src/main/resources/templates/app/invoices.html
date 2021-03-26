@@ -92,8 +92,8 @@
                 </tr>
                 <tr align="center" th:each="invoice:${invoiceList}">
                     <td scope="row"><span th:text="${invoice.client.clientName}"> Client Name</span></td>
-                    <td scope="row"><span th:text="${invoice.invoiceDate}"> Invoice Date</span></td>
-                    <td scope="row"><span th:text="${invoice.dueDate}"> Due Date</span></td>
+                    <td scope="row"><span th:text="${#dates.format(invoice.invoiceDate, 'dd-MM-yyyy')}"> Invoice Date</span></td>
+                    <td scope="row"><span th:text="${#dates.format(invoice.dueDate, 'dd-MM-yyyy')}"> Due Date</span></td>
                     <td scope="row"><span th:text="${invoice.supplierNotes}"> Supplier's notes </span></td>
                     <td scope="row"><a th:href="@{/app/invoiceLine/{invoiceId}(invoiceId=${invoice.invoiceId})}">
                         Details</a></td>

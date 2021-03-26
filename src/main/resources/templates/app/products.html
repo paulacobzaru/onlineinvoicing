@@ -126,8 +126,8 @@
                     <td align="right"scope="row"><span th:text="${product.stock}"> Quantity</span></td>
                     <td align="right" scope="row"><span th:text="${product.acquisitionPrice}"> Acquistion Price</span></td>
                     <td align="right"scope="row"><span th:text="${product.vatRate.vatRate}"> VAT Rate</span></td>
-                    <td align="center" cope="row"><span th:text="${product.dateOfAcquisition}"> Date of Acquisition</span></td>
-                    <td align="center" scope="row"><span th:text="${product.expirationDate}"> Date of Expiration</span></td>
+                    <td align="center" cope="row"><span th:text="${#dates.format(product.dateOfAcquisition, 'dd-MM-yyyy')}"> Date of Acquisition</span></td>
+                    <td align="center" scope="row"><span th:text="${#dates.format(product.expirationDate, 'dd-MM-yyyy')}"> Date of Expiration</span></td>
                     <td align="center"><a th:href="@{/app/products/edit/{productId}(productId=${product.productId})}"> Edit</a></td>
                     <td align="center"><a th:href="@{/app/products/delete/{productId}(productId=${product.productId})}"> Delete</a></td>
                 </tr>
