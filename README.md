@@ -11,7 +11,9 @@ the clients, the products and services provided, the currency used and VAT rates
 - Issue invoices and payments;
 - Management of clients for each user;
 - Management of products and services provided by the user;
-- Reports and statistics for user (company) for issued invoices, products/services sold, payments in total invoices or for each client, most sold products or services etc. The project will have different tables with different relationship among them, such as:
+- Reports and statistics for user (company) for issued invoices, products/services sold, payments in total invoices or for each client, most sold products or services etc. 
+
+The project will have different tables with different relationship among them, such as:
 - Users (companies);
 - Clients;
 - Products/services;
