@@ -30,6 +30,6 @@ the clients, the products and services provided, the currency used and VAT rates
 - Unit type;
 - Payment type;
 - Contact person. 
-- The Maven project will use JPA repositories, HTML templates and CSS styles and 
+The Maven project will use JPA repositories, HTML templates and CSS styles and 
 will provide an on line template for issuing invoices by the signed in users to their clients, 
 along with payments and providing reports for anlysing the past activities in order to take better decisions in the future and see the market trends.
